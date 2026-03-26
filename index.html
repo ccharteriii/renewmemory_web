@@ -1,15 +1,1495 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Renew</title>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Renew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────────────────
+   RENEW — Styles
+───────────────────────────────────────────── */
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Renew Verse memory</h1>
-				<p>An application for renewing your mind through the memorization of scripture.</p>
-			</header>
+:root {
+  --bg:            #F6FEFF;
+  --bg-card:       #FFFFFF;
+  --bg-blue:       #EBF7FF;
+  --bg-green:      #EDFAF3;
+  --text:          #162635;
+  --text-muted:    #4E7A93;
+  --text-faint:    #93BAD0;
+  --blue:          #2FA8E0;
+  --blue-mid:      #4ABCF0;
+  --blue-light:    #A8DEFF;
+  --blue-pale:     #D9F1FF;
+  --blue-glow:     rgba(47,168,224,0.15);
+  --green:         #2EC47A;
+  --green-mid:     #45D98E;
+  --green-light:   #96ECC0;
+  --green-pale:    #DCFAED;
+  --green-glow:    rgba(46,196,122,0.15);
+  --border:        rgba(47,168,224,0.16);
+  --border-green:  rgba(46,196,122,0.22);
+  --shadow-sm:     0 2px 12px rgba(47,168,224,0.10);
+  --shadow:        0 6px 28px rgba(47,168,224,0.14);
+  --shadow-lg:     0 14px 48px rgba(47,168,224,0.18);
+  --radius-sm:     12px;
+  --radius:        20px;
+  --radius-lg:     28px;
+  --radius-pill:   999px;
+  --nav-h:         68px;
+  --ease:          cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-	</body>
+[data-theme="dark"] {
+  --bg:            #0B1E2D;
+  --bg-card:       #102234;
+  --bg-blue:       #0E2030;
+  --bg-green:      #0C1E18;
+  --text:          #DFF0FC;
+  --text-muted:    #6FA8C8;
+  --text-faint:    #2E5A75;
+  --blue:          #48C0F8;
+  --blue-mid:      #6ACEFA;
+  --blue-light:    #9ADCFC;
+  --blue-pale:     rgba(72,192,248,0.08);
+  --blue-glow:     rgba(72,192,248,0.12);
+  --green:         #3DD98A;
+  --green-mid:     #5AE89E;
+  --green-light:   #88F0BC;
+  --green-pale:    rgba(61,217,138,0.08);
+  --green-glow:    rgba(61,217,138,0.12);
+  --border:        rgba(72,192,248,0.14);
+  --border-green:  rgba(61,217,138,0.18);
+  --shadow-sm:     0 2px 12px rgba(0,0,0,0.3);
+  --shadow:        0 6px 28px rgba(0,0,0,0.4);
+  --shadow-lg:     0 14px 48px rgba(0,0,0,0.5);
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+  transition:background 0.4s var(--ease-out),color 0.4s var(--ease-out);
+}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,textarea,select{font-family:inherit;outline:none}
+
+/* ── Typography ── */
+h1,h2,h3{font-family:'Baloo 2',sans-serif;line-height:1.15}
+
+.tag {
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:'Nunito',sans-serif;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--blue);background:var(--blue-pale);
+  padding:0.3rem 0.85rem;border-radius:var(--radius-pill);
+  margin-bottom:1rem;
+}
+.tag.green{color:var(--green);background:var(--green-pale)}
+
+.section-heading{
+  font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
+  color:var(--text);margin-bottom:1.2rem;
+}
+
+.body-text{
+  font-size:1.02rem;color:var(--text-muted);line-height:1.8;
+  margin-bottom:1.1rem;
+  transition-delay:var(--delay,0s);
+}
+
+/* ── Nav ── */
+.nav-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  background:rgba(246,254,255,0.88);
+  border-bottom:1px solid var(--border);
+  transition:background 0.4s,box-shadow 0.4s,border-color 0.4s;
+}
+[data-theme="dark"] .nav-header{background:rgba(11,30,45,0.9)}
+.nav-header.scrolled{box-shadow:var(--shadow-sm)}
+
+.nav-inner{
+  max-width:1140px;margin:0 auto;padding:0 2rem;
+  height:100%;display:flex;align-items:center;justify-content:space-between;
+}
+
+.nav-logo{
+  display:flex;align-items:center;gap:0.55rem;
+  font-family:'Baloo 2',sans-serif;font-size:1.5rem;font-weight:800;
+  color:var(--text);
+}
+.logo-icon{
+  width:32px;height:32px;flex-shrink:0;
+  animation:logoBob 3s ease-in-out infinite;
+}
+@keyframes logoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+.nav-links{display:flex;gap:2rem}
+.nav-link{
+  font-size:0.9rem;font-weight:600;color:var(--text-muted);
+  padding:0.3rem 0;position:relative;
+  transition:color 0.25s;
+}
+.nav-link::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:0;height:2.5px;border-radius:2px;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  transition:width 0.3s var(--ease-out);
+}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+
+.nav-controls{display:flex;align-items:center;gap:0.6rem}
+
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg-blue);border:1.5px solid var(--border);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.theme-toggle:hover{border-color:var(--blue);background:var(--blue-pale);transform:scale(1.08)}
+.theme-icon{
+  position:absolute;width:20px;height:20px;
+  transition:opacity 0.3s,transform 0.3s;
+}
+.theme-icon.sun{opacity:1;transform:translateY(0)}
+.theme-icon.moon{opacity:0;transform:translateY(8px)}
+[data-theme="dark"] .theme-icon.sun{opacity:0;transform:translateY(-8px)}
+[data-theme="dark"] .theme-icon.moon{opacity:1;transform:translateY(0)}
+
+.menu-toggle{
+  display:none;flex-direction:column;gap:5px;
+  width:38px;height:38px;align-items:center;justify-content:center;
+}
+.menu-toggle span{
+  display:block;width:20px;height:2px;
+  background:var(--text);border-radius:2px;
+  transition:all 0.3s var(--ease-out);
+}
+.menu-toggle.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.menu-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.menu-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile Drawer */
+.mobile-drawer{
+  position:fixed;top:var(--nav-h);right:0;
+  width:260px;height:calc(100vh - var(--nav-h));
+  background:var(--bg-card);border-left:1px solid var(--border);
+  z-index:99;padding:1.5rem;
+  transform:translateX(100%);transition:transform 0.35s var(--ease-out);
+}
+.mobile-drawer.open{transform:translateX(0)}
+.drawer-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(11,30,45,0.25);backdrop-filter:blur(2px);z-index:98;
+}
+.drawer-overlay.visible{display:block}
+.drawer-links{display:flex;flex-direction:column;gap:0.4rem}
+.drawer-link{
+  display:block;padding:0.8rem 1rem;border-radius:var(--radius-sm);
+  font-size:0.95rem;font-weight:600;color:var(--text-muted);
+  transition:all 0.25s;
+}
+.drawer-link:hover{background:var(--bg-blue);color:var(--blue);padding-left:1.4rem}
+
+/* ── Pages ── */
+.page{min-height:100vh;padding-top:var(--nav-h);position:relative;overflow:hidden}
+
+/* ─────────────── HOME ─────────────── */
+#home{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding-bottom:5rem;
+  background:var(--bg);
+}
+
+/* Floating decorations */
+.floaties{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;
+}
+.floaty{
+  position:absolute;opacity:0.55;
+  animation:floatUp var(--dur,12s) var(--del,0s) ease-in-out infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) rotate(var(--rot0,0deg));opacity:0.55}
+  50%{transform:translateY(-28px) rotate(var(--rot1,8deg));opacity:0.75}
+  100%{transform:translateY(0) rotate(var(--rot0,0deg));opacity:0.55}
+}
+
+.hero-content{
+  position:relative;z-index:1;
+  max-width:720px;padding:2rem 2rem 0;
+  animation:popIn 0.9s var(--ease) both;
+}
+@keyframes popIn{
+  from{opacity:0;transform:translateY(40px) scale(0.96)}
+  to{opacity:1;transform:none}
+}
+
+.hero-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  margin-bottom:1.5rem;
+  animation:popIn 0.9s 0.1s both;
+}
+
+.hero-title{
+  font-size:clamp(4.5rem,14vw,9rem);
+  font-weight:800;line-height:1;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--green) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:1rem;
+  animation:popIn 0.9s 0.15s both;
+}
+
+.hero-sub{
+  font-size:clamp(1.1rem,2.8vw,1.45rem);
+  font-weight:500;color:var(--text-muted);
+  margin-bottom:2.5rem;
+  animation:popIn 0.9s 0.25s both;
+}
+
+/* Verse Card */
+.verse-card{
+  background:var(--bg-card);
+  border:2px solid var(--blue-pale);
+  border-radius:var(--radius-lg);
+  padding:2rem 2.5rem;
+  margin-bottom:2.5rem;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  animation:popIn 0.9s 0.4s both;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.verse-card:hover{border-color:var(--blue-light);box-shadow:var(--shadow)}
+.verse-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--green));
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.verse-drop{
+  display:flex;justify-content:center;margin-bottom:0.8rem;
+}
+.verse-drop svg{width:22px;height:22px;opacity:0.6}
+
+.verse-text{
+  font-family:'Baloo 2',sans-serif;
+  font-size:clamp(1.05rem,2.5vw,1.3rem);
+  font-weight:500;color:var(--text);
+  line-height:1.6;margin-bottom:0.7rem;
+  min-height:3.5em;
+  transition:opacity 0.45s ease;
+}
+.verse-ref{
+  font-size:0.8rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--blue);transition:opacity 0.45s ease;
+}
+.verse-text.fading,.verse-ref.fading{opacity:0}
+
+/* Verse dots */
+.verse-dots{
+  display:flex;justify-content:center;gap:6px;
+  margin-top:1.2rem;
+}
+.v-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--blue-light);
+  transition:all 0.3s var(--ease);cursor:pointer;
+}
+.v-dot.active{background:var(--blue);transform:scale(1.3)}
+
+/* App Store Button */
+.appstore-btn{
+  display:inline-flex;align-items:center;gap:1rem;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);
+  color:#fff;
+  padding:1rem 2.2rem;border-radius:var(--radius-pill);
+  box-shadow:0 6px 24px var(--blue-glow);
+  transition:all 0.3s var(--ease);
+  animation:popIn 0.9s 0.55s both;
+  font-weight:700;
+}
+.appstore-btn:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 12px 36px var(--blue-glow);
+}
+.appstore-icon{width:24px;height:24px;fill:#fff;flex-shrink:0}
+.appstore-text{display:flex;flex-direction:column;text-align:left}
+.appstore-small{font-size:0.66rem;opacity:0.85;letter-spacing:0.04em;line-height:1.1}
+.appstore-large{font-size:1.1rem;font-weight:800;line-height:1.2}
+.hero-note{font-size:0.78rem;color:var(--text-faint);margin-top:0.9rem;animation:popIn 0.9s 0.7s both}
+
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  animation:popIn 0.9s 1.1s both;z-index:1;
+}
+.scroll-hint span{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-faint)}
+.scroll-chevron{
+  width:20px;height:20px;
+  border-right:2px solid var(--blue-light);
+  border-bottom:2px solid var(--blue-light);
+  transform:rotate(45deg);
+  animation:chev 1.8s ease-in-out infinite;
+}
+@keyframes chev{0%,100%{opacity:1;transform:rotate(45deg) translate(0,0)}50%{opacity:0.4;transform:rotate(45deg) translate(4px,4px)}}
+
+/* Wave divider */
+.wave-divider{
+  display:block;width:100%;overflow:hidden;line-height:0;
+  margin-top:-2px;
+}
+.wave-divider svg{display:block;width:100%}
+
+/* ─────────────── ABOUT ─────────────── */
+#about{padding-bottom:5rem}
+
+.about-section{padding:5rem 0}
+.section-container{max-width:1100px;margin:0 auto;padding:0 2rem}
+
+/* Mission */
+.mission-section{background:var(--bg-blue);text-align:center}
+[data-theme="dark"] .mission-section{background:var(--bg-blue)}
+
+.mission-intro{
+  font-size:clamp(1.1rem,2.5vw,1.35rem);
+  font-weight:500;color:var(--text-muted);
+  max-width:660px;margin:0 auto 3.5rem;line-height:1.75;
+}
+
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+
+.pillar{
+  background:var(--bg-card);border:2px solid transparent;
+  border-radius:var(--radius);padding:2.2rem 1.8rem;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+  transition:all 0.35s var(--ease);
+  transition-delay:var(--delay,0s);
+}
+.pillar:hover{
+  border-color:var(--border);
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:var(--shadow);
+}
+.pillar:nth-child(1):hover{border-color:var(--blue-light)}
+.pillar:nth-child(2):hover{border-color:var(--green-light)}
+.pillar:nth-child(3):hover{border-color:var(--blue-light)}
+
+.pillar-emoji{
+  font-size:2.4rem;margin-bottom:0.8rem;display:block;
+  transition:transform 0.3s var(--ease);
+}
+.pillar:hover .pillar-emoji{transform:scale(1.2) rotate(-5deg)}
+
+.pillar-title{
+  font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:700;
+  color:var(--text);margin-bottom:0.6rem;
+}
+.pillar-desc{font-size:0.9rem;color:var(--text-muted);line-height:1.7}
+
+/* About divider */
+.section-divider{
+  display:flex;align-items:center;gap:1.2rem;
+  padding:0 2rem;max-width:1100px;margin:0 auto;
+}
+.section-divider::before,.section-divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+.divider-leaf{font-size:1.1rem}
+
+/* Background section */
+.background-section{background:var(--bg)}
+.background-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+}
+
+.visual-card{
+  background:linear-gradient(145deg,var(--bg-blue),var(--bg-green));
+  border:2px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:2.5rem;
+  position:relative;
+  box-shadow:var(--shadow);
+  transition:transform 0.4s var(--ease),box-shadow 0.4s;
+}
+.visual-card:hover{transform:rotate(-1.5deg) scale(1.02);box-shadow:var(--shadow-lg)}
+
+.visual-quote-mark{
+  font-family:'Baloo 2',sans-serif;font-size:4.5rem;font-weight:800;
+  color:var(--blue);opacity:0.25;line-height:0.7;display:block;margin-bottom:0.5rem;
+}
+.visual-card p{
+  font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:600;
+  color:var(--text);line-height:1.6;margin-bottom:1rem;
+}
+.visual-card cite{
+  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--green);font-style:normal;
+}
+
+.card-deco{
+  position:absolute;bottom:-16px;right:-16px;
+  width:60px;height:60px;opacity:0.35;
+}
+
+/* Timeline */
+.timeline-section{background:var(--bg-green)}
+[data-theme="dark"] .timeline-section{background:var(--bg-green)}
+
+.timeline{position:relative;max-width:720px;margin:0 auto;padding:0.5rem 0}
+
+.timeline-spine{
+  position:absolute;left:50%;top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,transparent,var(--border-green) 8%,var(--border-green) 92%,transparent);
+  transform:translateX(-50%);
+}
+
+.tl-item{
+  display:grid;grid-template-columns:1fr 2rem 1fr;
+  gap:0 1.5rem;align-items:start;
+  margin-bottom:2.8rem;
+}
+
+.tl-dot{
+  width:14px;height:14px;
+  background:var(--bg-card);border:2.5px solid var(--green);
+  border-radius:50%;margin-top:1.3rem;
+  position:relative;z-index:1;justify-self:center;
+  transition:all 0.3s var(--ease);
+}
+.tl-dot-now{
+  width:18px;height:18px;
+  background:var(--green);border-color:var(--green);
+  margin-top:calc(1.3rem - 2px);
+  box-shadow:0 0 0 5px var(--green-glow),0 0 18px var(--green-glow);
+  animation:nowPulse 2.5s ease-in-out infinite;
+}
+@keyframes nowPulse{
+  0%,100%{box-shadow:0 0 0 5px var(--green-glow),0 0 14px var(--green-glow)}
+  50%{box-shadow:0 0 0 9px var(--green-glow),0 0 28px var(--green-glow)}
+}
+
+.tl-card{
+  display:inline-block;background:var(--bg-card);
+  border:1.5px solid var(--border-green);
+  border-radius:var(--radius);padding:1.3rem 1.4rem;
+  max-width:280px;width:100%;
+  box-shadow:var(--shadow-sm);
+  transition:all 0.3s var(--ease);
+}
+.tl-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.tl-card-now{
+  border-color:var(--green-mid);
+  background:linear-gradient(145deg,var(--bg-card),var(--green-pale));
+}
+
+.tl-year{
+  font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;
+  color:var(--green);display:block;line-height:1;margin-bottom:0.2rem;
+}
+.tl-title{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.35rem}
+.tl-desc{font-size:0.86rem;color:var(--text-muted);line-height:1.65}
+
+.tl-content{text-align:right}
+.tl-content.right{text-align:left}
+.tl-spacer{}
+
+/* ─────────────── CONTACT ─────────────── */
+#contact{background:var(--bg);padding-bottom:6rem}
+
+.contact-wrap{
+  max-width:1100px;margin:0 auto;padding:5rem 2rem 0;
+  display:grid;grid-template-columns:1fr 1px 1fr;gap:5rem;align-items:start;
+}
+.contact-vline{
+  width:1px;height:100%;
+  background:linear-gradient(to bottom,transparent,var(--border),transparent);
+  align-self:stretch;
+}
+
+/* Form */
+.contact-form{margin-top:2rem}
+
+.form-row{margin-bottom:1.3rem}
+.form-half{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column}
+
+.form-label{
+  font-size:0.76rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:0.45rem;
+}
+
+.form-input,.form-select,.form-textarea{
+  width:100%;background:var(--bg-blue);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:0.8rem 1rem;
+  font-size:0.95rem;color:var(--text);
+  transition:all 0.25s;-webkit-appearance:none;appearance:none;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--blue);background:var(--bg-card);
+  box-shadow:0 0 0 3px var(--blue-glow);
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-faint)}
+.form-textarea{resize:vertical;min-height:120px}
+
+.select-wrap{position:relative}
+.form-select{padding-right:2.5rem;cursor:pointer}
+.form-select option{background:var(--bg-card);color:var(--text)}
+.sel-arrow{
+  position:absolute;right:1rem;top:50%;transform:translateY(-50%);
+  color:var(--text-muted);pointer-events:none;font-size:1.1rem;line-height:1;
+}
+
+/* Type toggle */
+.type-toggle{
+  display:flex;background:var(--bg-blue);
+  border:1.5px solid var(--border);border-radius:var(--radius-pill);
+  padding:4px;gap:4px;
+}
+.type-btn{
+  flex:1;padding:0.55rem 1rem;border-radius:var(--radius-pill);
+  font-size:0.88rem;font-weight:700;color:var(--text-muted);
+  transition:all 0.25s var(--ease);text-align:center;
+}
+.type-btn.active{
+  background:var(--blue);color:#fff;
+  box-shadow:0 3px 12px var(--blue-glow);
+}
+[data-theme="dark"] .type-btn.active{background:var(--blue)}
+
+/* Submit */
+.submit-btn{
+  display:flex;align-items:center;justify-content:center;gap:0.8rem;
+  width:100%;
+  background:linear-gradient(135deg,var(--blue),var(--green));
+  color:#fff;padding:0.95rem;border-radius:var(--radius-pill);
+  font-size:0.95rem;font-weight:700;letter-spacing:0.03em;
+  box-shadow:0 4px 18px var(--blue-glow);
+  transition:all 0.3s var(--ease);margin-top:0.4rem;
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--blue-glow)}
+.submit-icon{transition:transform 0.3s var(--ease)}
+.submit-btn:hover .submit-icon{transform:translateX(5px)}
+
+.form-success{
+  display:none;align-items:center;gap:0.8rem;
+  margin-top:1rem;padding:1rem 1.2rem;
+  background:var(--green-pale);border:1.5px solid var(--border-green);
+  border-radius:var(--radius-sm);font-size:0.9rem;color:var(--text-muted);
+}
+.form-success.visible{display:flex;animation:popIn 0.4s both}
+.success-icon{font-size:1rem}
+
+/* Mailing */
+.mailing-card{
+  background:linear-gradient(145deg,var(--bg-blue),var(--bg-green));
+  border:2px solid var(--border);border-radius:var(--radius-lg);
+  padding:2.5rem;box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden;
+}
+.mailing-card::after{
+  content:'🌿';position:absolute;bottom:-8px;right:16px;
+  font-size:4rem;opacity:0.12;transform:rotate(-20deg);pointer-events:none;
+}
+
+.mailing-badge{
+  display:inline-block;font-size:0.7rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--green);background:var(--green-pale);
+  padding:0.28rem 0.8rem;border-radius:var(--radius-pill);
+  margin-bottom:1rem;
+}
+.mailing-title{
+  font-family:'Baloo 2',sans-serif;font-size:1.75rem;font-weight:800;
+  color:var(--text);margin-bottom:0.7rem;
+}
+.mailing-desc{font-size:0.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.4rem}
+
+.mailing-input-row{
+  display:flex;background:var(--bg-card);
+  border:1.5px solid var(--border);border-radius:var(--radius-pill);
+  overflow:hidden;transition:border-color 0.25s,box-shadow 0.25s;
+}
+.mailing-input-row:focus-within{border-color:var(--green);box-shadow:0 0 0 3px var(--green-glow)}
+
+.mailing-input{
+  flex:1;background:transparent;border:none;
+  padding:0.8rem 1.3rem;font-size:0.9rem;color:var(--text);
+}
+.mailing-input::placeholder{color:var(--text-faint)}
+
+.mailing-btn{
+  background:var(--green);color:#fff;
+  padding:0.8rem 1.4rem;font-size:0.85rem;font-weight:700;
+  border-radius:var(--radius-pill);margin:3px;
+  transition:all 0.25s var(--ease);white-space:nowrap;
+}
+.mailing-btn:hover{background:var(--green-mid);transform:scale(1.03)}
+
+.mailing-success{
+  display:none;margin-top:0.9rem;
+  font-size:0.88rem;color:var(--green);font-weight:600;
+}
+.mailing-success.visible{display:block;animation:popIn 0.4s both}
+.mailing-note{font-size:0.74rem;color:var(--text-faint);margin-top:0.9rem;line-height:1.6}
+
+.contact-info{display:flex;flex-direction:column;gap:0.9rem;margin-top:2rem}
+.info-card{
+  display:flex;align-items:flex-start;gap:0.9rem;
+  padding:1.1rem 1.3rem;background:var(--bg-card);
+  border:1.5px solid var(--border);border-radius:var(--radius-sm);
+  transition:all 0.25s;
+}
+.info-card:hover{border-color:var(--blue-light);transform:translateX(3px)}
+.info-emoji{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.info-label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:0.2rem}
+.info-val{font-size:0.9rem;color:var(--text-muted)}
+.info-link{color:var(--blue);transition:color 0.2s}
+.info-link:hover{color:var(--blue-mid)}
+
+/* ── Footer ── */
+.site-footer{
+  background:var(--bg-card);
+  border-top:1.5px solid var(--border);
+  padding:3rem 2rem;text-align:center;
+}
+.footer-inner{max-width:600px;margin:0 auto}
+.footer-logo{
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  font-family:'Baloo 2',sans-serif;font-size:1.35rem;font-weight:800;
+  color:var(--text);margin-bottom:0.8rem;
+}
+.footer-logo svg{width:26px;height:26px}
+.footer-verse{
+  font-size:0.95rem;color:var(--text-muted);font-weight:500;
+  margin-bottom:0.8rem;line-height:1.6;
+}
+.footer-verse em{color:var(--blue);font-style:normal;font-weight:700}
+.footer-copy{font-size:0.78rem;color:var(--text-faint)}
+
+/* ── Scroll Reveals ── */
+.reveal,.reveal-l,.reveal-r,.reveal-tl{
+  opacity:0;
+  transition:opacity 0.65s var(--ease-out),transform 0.65s var(--ease-out);
+  transition-delay:var(--delay,0s);
+}
+.reveal   {transform:translateY(28px)}
+.reveal-l {transform:translateX(-28px)}
+.reveal-r {transform:translateX(28px)}
+.reveal-tl{transform:translateY(20px)}
+
+.reveal.in,.reveal-l.in,.reveal-r.in,.reveal-tl.in{opacity:1;transform:none}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .menu-toggle{display:flex}
+  .pillars{grid-template-columns:1fr}
+  .background-grid{grid-template-columns:1fr;gap:2.5rem}
+  .background-visual{order:-1}
+  .timeline-spine{left:18px}
+  .tl-item{grid-template-columns:36px 1fr}
+  .tl-dot{margin-top:1.1rem}
+  .tl-dot-now{margin-top:calc(1.1rem - 2px)}
+  .tl-content{text-align:left!important}
+  .tl-spacer{display:none}
+  .tl-card{max-width:100%;display:block}
+  .contact-wrap{grid-template-columns:1fr;gap:3rem;padding-top:3rem}
+  .contact-vline{display:none}
+}
+@media(max-width:600px){
+  :root{--nav-h:60px}
+  .form-half{grid-template-columns:1fr}
+  .about-section{padding:3.5rem 0}
+  .hero-title{font-size:clamp(3.5rem,16vw,5.5rem)}
+  .mailing-input-row{flex-direction:column;border-radius:var(--radius-sm)}
+  .mailing-btn{border-radius:0 0 var(--radius-sm) var(--radius-sm);margin:0}
+}
+@media(max-height:500px) and (orientation:landscape){
+  #home{padding:calc(var(--nav-h) + 1.5rem) 2rem 2rem;min-height:auto}
+  .scroll-hint{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<header class="nav-header" id="navbar">
+  <nav class="nav-inner">
+    <div class="nav-logo">
+      <!-- Leaf logo icon -->
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="url(#logoGrad)"/>
+        <path d="M10 22 C10 22 11 14 18 10 C22 8 25 9 25 9 C25 9 24 12 22 15 C19 19 14 21 10 22Z" fill="white" opacity="0.9"/>
+        <path d="M13 22 C13 22 14 18 17 15" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#2FA8E0"/>
+            <stop offset="1" stop-color="#2EC47A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      Renew
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home"    class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#about"   class="nav-link"        data-page="about">About</a></li>
+      <li><a href="#contact" class="nav-link"        data-page="contact">Contact</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <!-- Sun -->
+        <svg class="theme-icon sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="4.5" fill="#F5B93A"/>
+          <path d="M12 3v2M12 19v2M3 12H5M19 12h2M5.64 5.64l1.41 1.41M16.95 16.95l1.41 1.41M5.64 18.36l1.41-1.41M16.95 7.05l1.41-1.41" stroke="#F5B93A" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <!-- Moon -->
+        <svg class="theme-icon moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#A8C8F8" stroke="#A8C8F8" stroke-width="0.5"/>
+        </svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <ul class="drawer-links">
+    <li><a href="#home"    class="drawer-link" data-page="home">🏠 Home</a></li>
+    <li><a href="#about"   class="drawer-link" data-page="about">🌿 About</a></li>
+    <li><a href="#contact" class="drawer-link" data-page="contact">💧 Contact</a></li>
+  </ul>
+</div>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- ═══════════ HOME ═══════════ -->
+<section class="page" id="home">
+
+  <!-- Floating cartoon leaves & drops -->
+  <div class="floaties" id="floaties"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="tag">💧 Coming to the App Store</span>
+    </div>
+
+    <h1 class="hero-title">Renew</h1>
+    <p class="hero-sub">Daily Bible verse memory.<br>Simple, refreshing, yours.</p>
+
+    <!-- Verse carousel -->
+    <div class="verse-card">
+      <div class="verse-drop">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3C12 3 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 3 12 3Z" fill="url(#dropGrad)" stroke="none"/>
+          <path d="M9 16.5C9 18.16 10.34 19.5 12 19.5" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+          <defs>
+            <linearGradient id="dropGrad" x1="12" y1="3" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4ABCF0"/>
+              <stop offset="1" stop-color="#2FA8E0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <p class="verse-text" id="verseText"></p>
+      <p class="verse-ref"  id="verseRef"></p>
+      <div class="verse-dots" id="verseDots"></div>
+    </div>
+
+    <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="appstore-btn">
+      <svg class="appstore-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.78 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
+      </svg>
+      <div class="appstore-text">
+        <span class="appstore-small">Download on the</span>
+        <span class="appstore-large">App Store</span>
+      </div>
+    </a>
+    <p class="hero-note">iOS 26+ · Free to download</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<!-- Wave into About -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="var(--bg-blue)"/>
+  </svg>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="page" id="about">
+
+  <!-- Mission -->
+  <div class="about-section mission-section">
+    <div class="section-container" style="text-align:center">
+      <span class="tag reveal">🌿 Our Mission</span>
+      <h2 class="section-heading reveal">Rooted in purpose.<br>Refreshed daily.</h2>
+      <p class="mission-intro reveal">
+        Renew helps you carry Scripture with you — not just in your pocket, 
+        but in your heart. We believe memorizing God's Word should feel 
+        like a breath of fresh air, not a chore.
+      </p>
+      <div class="pillars">
+        <div class="pillar reveal" style="--delay:0.05s">
+          <span class="pillar-emoji">💧</span>
+          <h3 class="pillar-title">Refreshing</h3>
+          <p class="pillar-desc">Every session feels light and encouraging — like a cool drink of water for your spirit.</p>
+        </div>
+        <div class="pillar reveal" style="--delay:0.15s">
+          <span class="pillar-emoji">🌱</span>
+          <h3 class="pillar-title">Growth-Minded</h3>
+          <p class="pillar-desc">Science-backed spaced repetition helps verses take root and grow in your memory naturally.</p>
+        </div>
+        <div class="pillar reveal" style="--delay:0.25s">
+          <span class="pillar-emoji">☀️</span>
+          <h3 class="pillar-title">Daily Renewal</h3>
+          <p class="pillar-desc">Just a few minutes a day is all it takes. Small, consistent habits bring lasting transformation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave between sections -->
+  <div class="wave-divider" style="transform:scaleY(-1) scaleX(-1)">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60 Z" fill="var(--bg-blue)"/>
+    </svg>
+  </div>
+
+  <!-- Background -->
+  <div class="about-section background-section">
+    <div class="section-container background-grid">
+      <div>
+        <span class="tag green reveal-l">🌿 Our Background</span>
+        <h2 class="section-heading reveal-l">Born from a<br>real need.</h2>
+        <p class="body-text reveal-l">
+          Renew started with a simple question: why is it so hard to actually 
+          remember what we read? Our founders — a small group of friends who 
+          met in a Bible study — kept forgetting the very verses that had 
+          moved them most.
+        </p>
+        <p class="body-text reveal-l" style="--delay:0.12s">
+          So they built something. Not a flashcard app, not another notetaking 
+          tool — but a gentle, daily companion that meets you where you are 
+          and helps one verse at a time sink in deep.
+        </p>
+        <p class="body-text reveal-l" style="--delay:0.24s">
+          Renew is designed to feel as natural and nourishing as watering 
+          a plant — small acts, done faithfully, that lead to something beautiful.
+        </p>
+      </div>
+      <div class="background-visual reveal-r">
+        <div class="visual-card">
+          <span class="visual-quote-mark">"</span>
+          <p>I have stored up your word in my heart, that I might not sin against you.</p>
+          <cite>— Psalm 119:11</cite>
+          <!-- Leaf decoration -->
+          <svg class="card-deco" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 50 C10 50 14 28 35 16 C46 10 56 13 56 13 C56 13 53 24 44 34 C33 46 18 50 10 50Z" fill="var(--green)" opacity="0.5"/>
+            <path d="M20 50 C20 50 24 38 34 28" stroke="var(--green)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wave into timeline -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,35 C180,70 360,0 540,35 C720,70 900,0 1080,35 C1260,70 1380,14 1440,35 L1440,70 L0,70 Z" fill="var(--bg-green)"/>
+    </svg>
+  </div>
+
+  <!-- Timeline -->
+  <div class="about-section timeline-section">
+    <div class="section-container">
+      <div style="text-align:center;margin-bottom:3rem">
+        <span class="tag green reveal">🌱 Our History</span>
+        <h2 class="section-heading reveal">How we got here.</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-spine"></div>
+
+        <div class="tl-item reveal-tl" style="--delay:0.0s">
+          <div class="tl-dot"></div>
+          <div class="tl-content right">
+            <div class="tl-card">
+              <span class="tl-year">2022</span>
+              <h4 class="tl-title">The Idea 💡</h4>
+              <p class="tl-desc">Three friends in a Bible study realize there's no app that actually helps verses stick. The first sketches for Renew appear on a whiteboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl" style="--delay:0.12s">
+          <div class="tl-dot"></div>
+          <div class="tl-content right">
+            <div class="tl-card">
+              <span class="tl-year">2023</span>
+              <h4 class="tl-title">Building the Team 🌿</h4>
+              <p class="tl-desc">Developers, a designer, and a theology grad join the mission. The core learning engine and verse library are built from scratch.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl" style="--delay:0.24s">
+          <div class="tl-dot"></div>
+          <div class="tl-content right">
+            <div class="tl-card">
+              <span class="tl-year">2024</span>
+              <h4 class="tl-title">Beta Testing 🧪</h4>
+              <p class="tl-desc">400+ beta testers across churches and small groups put Renew through its paces. Their feedback reshapes the app entirely for the better.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl" style="--delay:0.36s">
+          <div class="tl-dot"></div>
+          <div class="tl-content right">
+            <div class="tl-card">
+              <span class="tl-year">2025</span>
+              <h4 class="tl-title">Refinement 🎨</h4>
+              <p class="tl-desc">Every screen, animation, and interaction is polished until it feels effortless. Accessibility, dark mode, and daily reminder features added.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl" style="--delay:0.48s">
+          <div class="tl-dot tl-dot-now"></div>
+          <div class="tl-content right">
+            <div class="tl-card tl-card-now">
+              <span class="tl-year">2026</span>
+              <h4 class="tl-title">Launch! 🚀</h4>
+              <p class="tl-desc">Renew is launching on the App Store. Join our list to be the very first to know when it's live!</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="wave-divider" style="transform:scaleX(-1)">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60 Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="page" id="contact">
+  <div class="contact-wrap">
+
+    <!-- Left: Contact Form -->
+    <div>
+      <span class="tag reveal">💧 Reach Out</span>
+      <h2 class="section-heading reveal">We'd love to<br>hear from you.</h2>
+      <p class="body-text reveal">Whether you have a question, a suggestion, or just want to say hi — we're real people and we actually read every message.</p>
+
+      <form class="contact-form" id="contactForm" novalidate>
+
+        <div class="form-row">
+          <label class="form-label">What brings you here?</label>
+          <div class="type-toggle">
+            <button type="button" class="type-btn active" data-type="inquiry">💬 Inquiry</button>
+            <button type="button" class="type-btn" data-type="concern">🔧 Concern / Issue</button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="subCat">Category</label>
+          <div class="select-wrap">
+            <select id="subCat" class="form-select">
+              <option value="" disabled selected>Select a category…</option>
+            </select>
+            <span class="sel-arrow">⌄</span>
+          </div>
+        </div>
+
+        <div class="form-row form-half">
+          <div class="form-group">
+            <label class="form-label" for="cName">Name</label>
+            <input type="text" id="cName" class="form-input" placeholder="Your name" autocomplete="name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cEmail">Email</label>
+            <input type="email" id="cEmail" class="form-input" placeholder="you@email.com" autocomplete="email"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label" for="cMsg">Message</label>
+          <textarea id="cMsg" class="form-textarea" placeholder="Share what's on your mind…" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span class="submit-text">Send Message</span>
+          <span class="submit-icon">→</span>
+        </button>
+
+        <div class="form-success" id="formSuccess">
+          <span class="success-icon">✅</span>
+          <span>Got it! We'll be in touch soon. Thank you 🙏</span>
+        </div>
+      </form>
+    </div>
+
+    <div class="contact-vline"></div>
+
+    <!-- Right: Mailing List + Info -->
+    <div>
+      <div class="mailing-card reveal-r">
+        <div class="mailing-badge">🚀 Get Notified</div>
+        <h3 class="mailing-title">Join the waitlist.</h3>
+        <p class="mailing-desc">Be the first to know the moment Renew hits the App Store. Just one email — we promise it'll be worth the wait.</p>
+        <form id="mailingForm" novalidate>
+          <div class="mailing-input-row">
+            <input type="email" id="mEmail" class="mailing-input" placeholder="you@email.com" autocomplete="email"/>
+            <button type="submit" class="mailing-btn">Notify Me 🌿</button>
+          </div>
+          <div class="mailing-success" id="mailingSuccess">✅ You're on the list — see you at launch!</div>
+        </form>
+        <p class="mailing-note">One email, one launch. No spam ever. Unsubscribe anytime.</p>
+      </div>
+
+      <div class="contact-info reveal-r" style="--delay:0.15s">
+        <div class="info-card">
+          <span class="info-emoji">✉️</span>
+          <div>
+            <p class="info-label">Email us</p>
+            <a href="mailto:hello@renewapp.com" class="info-val info-link">hello@renewapp.com</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-emoji">⏱️</span>
+          <div>
+            <p class="info-label">Response time</p>
+            <p class="info-val">Within 2–3 business days</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-emoji">📍</span>
+          <div>
+            <p class="info-label">Based in</p>
+            <p class="info-val">Atlanta, GA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="url(#fLogoGrad)"/>
+        <path d="M10 22 C10 22 11 14 18 10 C22 8 25 9 25 9 C25 9 24 12 22 15 C19 19 14 21 10 22Z" fill="white" opacity="0.9"/>
+        <path d="M13 22 C13 22 14 18 17 15" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <defs><linearGradient id="fLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#2FA8E0"/><stop offset="1" stop-color="#2EC47A"/></linearGradient></defs>
+      </svg>
+      Renew
+    </div>
+    <p class="footer-verse">"Your word is a lamp to my feet and a <em>light</em> to my path." — Psalm 119:105</p>
+    <p class="footer-copy">© 2026 Renew App. Made with 💚 and a lot of prayer.</p>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────
+   RENEW — script.js
+───────────────────────────────────────────── */
+'use strict';
+
+// ── Verses ──
+const VERSES = [
+  {text:"I have stored up your word in my heart, that I might not sin against you.",ref:"Psalm 119:11"},
+  {text:"Your word is a lamp to my feet and a light to my path.",ref:"Psalm 119:105"},
+  {text:"In the beginning was the Word, and the Word was with God, and the Word was God.",ref:"John 1:1"},
+  {text:"For the word of God is living and active, sharper than any two-edged sword.",ref:"Hebrews 4:12"},
+  {text:"Do not let this Book of the Law depart from your mouth; meditate on it day and night.",ref:"Joshua 1:8"},
+  {text:"Let the word of Christ dwell in you richly, teaching and admonishing one another.",ref:"Colossians 3:16"},
+  {text:"Heaven and earth will pass away, but my words will not pass away.",ref:"Matthew 24:35"},
+];
+
+// ── Sub-categories ──
+const SUBCATS = {
+  inquiry: [
+    {v:"general",l:"General Question"},
+    {v:"feature",l:"Feature Request"},
+    {v:"partnership",l:"Partnership / Collaboration"},
+    {v:"press",l:"Press / Media"},
+    {v:"feedback",l:"App Feedback"},
+  ],
+  concern: [
+    {v:"bug",l:"Technical Bug"},
+    {v:"account",l:"Account / Access"},
+    {v:"content",l:"Content Concern"},
+    {v:"privacy",l:"Privacy Inquiry"},
+    {v:"other",l:"Other"},
+  ]
+};
+
+// ── DOM ──
+const html         = document.documentElement;
+const navbar       = document.getElementById('navbar');
+const themeToggle  = document.getElementById('themeToggle');
+const menuToggle   = document.getElementById('menuToggle');
+const mobileDrawer = document.getElementById('mobileDrawer');
+const drawerOverlay= document.getElementById('drawerOverlay');
+const verseTextEl  = document.getElementById('verseText');
+const verseRefEl   = document.getElementById('verseRef');
+const verseDotsEl  = document.getElementById('verseDots');
+const subCatSel    = document.getElementById('subCat');
+const typeBtns     = document.querySelectorAll('.type-btn');
+const contactForm  = document.getElementById('contactForm');
+const formSuccess  = document.getElementById('formSuccess');
+const mailingForm  = document.getElementById('mailingForm');
+const mailingSucc  = document.getElementById('mailingSuccess');
+const floatiesDiv  = document.getElementById('floaties');
+
+// ══════════════════════════════════
+// THEME: device preference + sunset/sunrise
+// ══════════════════════════════════
+
+function applyTheme(dark) {
+  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+}
+
+function getSunTimes(lat, lon) {
+  const now = new Date();
+  const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  const declRad   = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81)) * Math.PI / 180;
+  const latRad    = lat * Math.PI / 180;
+  const cosH      = (Math.cos(90.833 * Math.PI / 180) - Math.sin(latRad) * Math.sin(declRad))
+                    / (Math.cos(latRad) * Math.cos(declRad));
+  if (cosH > 1)  return { sunrise: 6,  sunset: 18 }; // polar night fallback
+  if (cosH < -1) return { sunrise: 0,  sunset: 24 }; // midnight sun fallback
+  const H         = Math.acos(cosH) * 180 / Math.PI;
+  const offset    = lon / 15;
+  const sunrise   = 12 - H / 15 - offset;
+  const sunset    = 12 + H / 15 - offset;
+  return { sunrise, sunset };
+}
+
+function decideTheme(lat, lon) {
+  // If user has manually set a preference, respect it
+  const saved = localStorage.getItem('renew-theme');
+  if (saved) { applyTheme(saved === 'dark'); return; }
+
+  const { sunrise, sunset } = getSunTimes(lat, lon);
+  const now = new Date();
+  const h = now.getHours() + now.getMinutes() / 60;
+  const isDaytime = h >= sunrise && h < sunset;
+  applyTheme(!isDaytime);
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('renew-theme');
+  if (saved) { applyTheme(saved === 'dark'); return; }
+
+  // Try geolocation for sun-based theme
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => decideTheme(pos.coords.latitude, pos.coords.longitude),
+      ()  => {
+        // Fallback: device preference
+        applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+      },
+      { timeout: 4000 }
+    );
+  } else {
+    applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+
+  // Re-check every 10 minutes in case of sunset/sunrise crossing
+  setInterval(() => {
+    if (!localStorage.getItem('renew-theme') && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        pos => decideTheme(pos.coords.latitude, pos.coords.longitude),
+        () => {}
+      );
+    }
+  }, 10 * 60 * 1000);
+}
+
+initTheme();
+
+// Manual toggle — saves preference
+themeToggle.addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  applyTheme(!isDark);
+  localStorage.setItem('renew-theme', isDark ? 'light' : 'dark');
+});
+
+// Clear manual preference if system theme matches (optional — double-click to reset)
+themeToggle.addEventListener('dblclick', () => {
+  localStorage.removeItem('renew-theme');
+  initTheme();
+});
+
+// Listen for system changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('renew-theme')) applyTheme(e.matches);
+});
+
+// ── Nav scroll ──
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  updateActiveNav();
+}, {passive:true});
+
+function updateActiveNav() {
+  const pages = ['home','about','contact'];
+  let active = 'home';
+  pages.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.getBoundingClientRect().top <= 100) active = id;
+  });
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.page === active));
+}
+
+// ── Mobile menu ──
+function openDrawer()  { mobileDrawer.classList.add('open'); drawerOverlay.classList.add('visible'); menuToggle.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer() { mobileDrawer.classList.remove('open'); drawerOverlay.classList.remove('visible'); menuToggle.classList.remove('open'); document.body.style.overflow=''; }
+
+menuToggle.addEventListener('click', () => mobileDrawer.classList.contains('open') ? closeDrawer() : openDrawer());
+drawerOverlay.addEventListener('click', closeDrawer);
+document.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', closeDrawer));
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t) return;
+    e.preventDefault();
+    const offset = parseInt(getComputedStyle(html).getPropertyValue('--nav-h')) || 68;
+    window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - offset, behavior:'smooth'});
+  });
+});
+
+// ── Verse carousel ──
+let verseIdx = 0;
+let verseTimer;
+
+function buildDots() {
+  verseDotsEl.innerHTML = '';
+  VERSES.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'v-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Verse ${i+1}`);
+    d.addEventListener('click', () => { clearInterval(verseTimer); showVerse(i); startVerseTimer(); });
+    verseDotsEl.appendChild(d);
+  });
+}
+
+function updateDots(idx) {
+  verseDotsEl.querySelectorAll('.v-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+
+function showVerse(idx, initial=false) {
+  if (!initial) {
+    verseTextEl.classList.add('fading');
+    verseRefEl.classList.add('fading');
+    setTimeout(() => {
+      verseTextEl.textContent = `"${VERSES[idx].text}"`;
+      verseRefEl.textContent  = VERSES[idx].ref;
+      verseTextEl.classList.remove('fading');
+      verseRefEl.classList.remove('fading');
+      updateDots(idx);
+    }, 450);
+  } else {
+    verseTextEl.textContent = `"${VERSES[idx].text}"`;
+    verseRefEl.textContent  = VERSES[idx].ref;
+    updateDots(idx);
+  }
+  verseIdx = idx;
+}
+
+function startVerseTimer() {
+  verseTimer = setInterval(() => {
+    showVerse((verseIdx + 1) % VERSES.length);
+  }, 7000);
+}
+
+buildDots();
+showVerse(0, true);
+startVerseTimer();
+
+// ── Floating decorations ──
+(function spawnFloaties() {
+  const leafSVG = (size, color, opacity) => `
+    <svg width="${size}" height="${size}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 32 C8 32 10 18 24 10 C31 6 37 8 37 8 C37 8 35 15 28 22 C20 30 11 33 8 32Z" fill="${color}" opacity="${opacity}"/>
+      <path d="M12 32 C12 32 16 24 22 18" stroke="${color}" stroke-width="1.5" stroke-linecap="round" opacity="${opacity * 0.7}"/>
+    </svg>`;
+
+  const dropSVG = (size, color, opacity) => `
+    <svg width="${size}" height="${size}" viewBox="0 0 30 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15 2 C15 2 4 16 4 22 C4 28.6 9 34 15 34 C21 34 26 28.6 26 22 C26 16 15 2 15 2Z" fill="${color}" opacity="${opacity}"/>
+    </svg>`;
+
+  const items = [
+    // leaves
+    {svg:()=>leafSVG(44,'#2EC47A',0.65), x:'8%',  y:'15%', dur:11, del:0,   rot0:'-10deg', rot1:'5deg'},
+    {svg:()=>leafSVG(32,'#3DBE72',0.5),  x:'88%', y:'22%', dur:13, del:2,   rot0:'15deg',  rot1:'-5deg'},
+    {svg:()=>leafSVG(52,'#2EC47A',0.4),  x:'75%', y:'68%', dur:9,  del:1.5, rot0:'-20deg', rot1:'-5deg'},
+    {svg:()=>leafSVG(28,'#45D98E',0.6),  x:'18%', y:'75%', dur:15, del:0.5, rot0:'5deg',   rot1:'20deg'},
+    {svg:()=>leafSVG(38,'#2EC47A',0.35), x:'55%', y:'85%', dur:10, del:3,   rot0:'-15deg', rot1:'0deg'},
+    // drops
+    {svg:()=>dropSVG(28,'#2FA8E0',0.55), x:'92%', y:'48%', dur:8,  del:1,   rot0:'0deg',   rot1:'8deg'},
+    {svg:()=>dropSVG(20,'#4ABCF0',0.45), x:'5%',  y:'52%', dur:12, del:2.5, rot0:'0deg',   rot1:'-5deg'},
+    {svg:()=>dropSVG(36,'#2FA8E0',0.4),  x:'38%', y:'8%',  dur:14, del:0,   rot0:'5deg',   rot1:'-3deg'},
+    {svg:()=>dropSVG(22,'#4ABCF0',0.5),  x:'62%', y:'12%', dur:10, del:1.8, rot0:'-5deg',  rot1:'6deg'},
+  ];
+
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'floaty';
+    el.innerHTML = item.svg();
+    el.style.cssText = `
+      left:${item.x};top:${item.y};
+      --dur:${item.dur}s;--del:${item.del}s;
+      --rot0:${item.rot0};--rot1:${item.rot1};
+    `;
+    floatiesDiv.appendChild(el);
+  });
+})();
+
+// ── Sub-categories ──
+let currentType = 'inquiry';
+
+function populateSub(type) {
+  subCatSel.innerHTML = '<option value="" disabled selected>Select a category…</option>';
+  (SUBCATS[type]||[]).forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.v; opt.textContent = o.l;
+    subCatSel.appendChild(opt);
+  });
+}
+populateSub('inquiry');
+
+typeBtns.forEach(btn => btn.addEventListener('click', () => {
+  typeBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentType = btn.dataset.type;
+  populateSub(currentType);
+}));
+
+// ── Contact Form ──
+contactForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name  = document.getElementById('cName').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const msg   = document.getElementById('cMsg').value.trim();
+  if (!name || !email || !msg) { shakeEl(contactForm); return; }
+  if (!validEmail(email)) { shakeEl(document.getElementById('cEmail')); return; }
+  const btn = contactForm.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.querySelector('.submit-text').textContent = 'Sending… 💌';
+  setTimeout(() => {
+    contactForm.reset(); populateSub(currentType);
+    btn.disabled = false;
+    btn.querySelector('.submit-text').textContent = 'Send Message';
+    formSuccess.classList.add('visible');
+    setTimeout(() => formSuccess.classList.remove('visible'), 6000);
+  }, 1200);
+});
+
+// ── Mailing Form ──
+mailingForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('mEmail').value.trim();
+  if (!validEmail(email)) { shakeEl(document.getElementById('mEmail')); return; }
+  const btn = mailingForm.querySelector('.mailing-btn');
+  btn.disabled = true; btn.textContent = 'Adding you…';
+  setTimeout(() => {
+    mailingForm.reset();
+    btn.disabled = false; btn.textContent = 'Notify Me 🌿';
+    mailingSucc.classList.add('visible');
+  }, 1000);
+});
+
+// ── Helpers ──
+function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+function shakeEl(el) {
+  el.animate([
+    {transform:'translateX(0)'},
+    {transform:'translateX(-7px)'},{transform:'translateX(7px)'},
+    {transform:'translateX(-5px)'},{transform:'translateX(5px)'},
+    {transform:'translateX(0)'}
+  ], {duration:400, easing:'ease-in-out'});
+  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+    el.style.borderColor = '#f87171';
+    setTimeout(() => { el.style.borderColor = ''; }, 1200);
+  }
+}
+
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r,.reveal-tl').forEach(el => revealObs.observe(el));
+
+// ── Pillar 3D tilt ──
+document.querySelectorAll('.pillar').forEach(p => {
+  p.addEventListener('mousemove', e => {
+    const r = p.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width  - 0.5;
+    const y = (e.clientY - r.top)  / r.height - 0.5;
+    p.style.transform = `perspective(500px) rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-6px)`;
+  });
+  p.addEventListener('mouseleave', () => { p.style.transform = ''; });
+});
+
+// ── Parallax floaties on mouse ──
+window.addEventListener('mousemove', e => {
+  const fx = (e.clientX / window.innerWidth  - 0.5);
+  const fy = (e.clientY / window.innerHeight - 0.5);
+  document.querySelectorAll('.floaty').forEach((el, i) => {
+    const f = (i % 3 + 1) * 6;
+    el.style.transform = `translate(${fx * f}px, ${fy * f}px)`;
+  });
+}, {passive:true});
+</script>
+</body>
 </html>
