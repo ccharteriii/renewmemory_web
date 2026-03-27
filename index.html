@@ -46,7 +46,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile tap */
+            -webkit-tap-highlight-color: transparent;
         }
 
         html { scroll-behavior: smooth; }
@@ -104,7 +104,6 @@
 
         .nav-links a:hover { opacity: 1; color: var(--primary-blue); }
 
-        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -146,10 +145,9 @@
             font-size: 1rem;
             transform: translateY(-6px);
             transition: transform 0.1s ease;
-            pointer-events: none; /* Allows the container to catch the active state */
+            pointer-events: none;
         }
 
-        /* Active state for both Desktop and Mobile */
         .btn-3d-container:active .btn-3d-top {
             transform: translateY(0px);
         }
@@ -166,7 +164,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 40px 5% 80px; /* Reduced top padding from 80px to 40px */
+            padding: 40px 5% 80px; 
             max-width: 1300px;
             margin: 0 auto;
             min-height: 75vh;
@@ -177,7 +175,7 @@
         .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px; }
         .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.4; font-weight: 500; }
 
-        /* --- Shimmer Effect for "Renew" --- */
+        /* --- Shimmer Effect --- */
         .shimmer-text {
             position: relative;
             display: inline-block;
@@ -193,21 +191,29 @@
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shimmer-swipe 2s infinite linear;
+            animation: shimmer-swipe 5.5s infinite linear;
         }
 
         @keyframes shimmer-swipe {
             0% { background-position: 150% 0; }
+            27% { background-position: -50% 0; }
             100% { background-position: -50% 0; }
         }
 
-        /* --- Hero Visual & Tight Floating Words --- */
+        /* --- Hero Visual & Grouping --- */
         .hero-visual {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+        }
+
+        .visual-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .phone {
@@ -237,16 +243,15 @@
             animation: float-tight 4s ease-in-out infinite;
         }
 
-        .fw-1 { top: 20%; left: 50%; margin-left: -210px; animation-delay: 0s; }
-        .fw-2 { top: 45%; left: 50%; margin-left: -250px; animation-delay: 1.5s; }
-        .fw-3 { top: 32%; left: 50%; margin-left: 155px; animation-delay: 0.8s; }
+        .fw-1 { top: 20%; right: 100%; margin-right: 20px; animation-delay: 0s; }
+        .fw-2 { top: 45%; right: 100%; margin-right: 40px; animation-delay: 1.5s; }
+        .fw-3 { top: 32%; left: 100%; margin-left: 20px; animation-delay: 0.8s; }
 
         @keyframes float-tight {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
         }
 
-        /* Phone UI bits */
         .phone-header { padding: 30px 20px 15px; display: flex; justify-content: space-between; align-items: center; }
         .progress-bar { height: 12px; background: var(--border-color); border-radius: 10px; flex-grow: 1; margin: 0 15px; position: relative; }
         .progress-fill { position: absolute; height: 100%; width: 65%; background: var(--primary-blue); border-radius: 10px; }
@@ -317,11 +322,9 @@
         .newsletter-box { background: rgba(255,255,255,0.1); padding: 48px; border-radius: 40px; display: flex; flex-direction: column; justify-content: center; }
 
         @media (max-width: 1024px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 20px; } /* Even closer on mobile */
+            .hero { flex-direction: column; text-align: center; padding-top: 20px; }
             .hero-content { max-width: 100%; order: 1; }
             .hero-visual { order: 2; margin-top: 40px; }
-            
-            /* Hamburger Logic */
             .hamburger { display: flex; }
             .nav-links { 
                 position: absolute; 
@@ -336,33 +339,68 @@
                 width: 250px;
                 text-align: center;
                 border: 1px solid var(--border-color);
+                gap: 20px;
             }
             .nav-links.active { display: flex; }
-
-            /* Reordering Notify Me to the top in the hamburger */
-            .nav-links .btn-3d-container { order: -1; margin-bottom: 20px; width: 100%; }
-            .nav-links a { margin-bottom: 15px; }
-            
             .feature-block, .feature-block:nth-child(even) { flex-direction: column; }
             #contact { grid-template-columns: 1fr; }
             .timeline::before { left: 30px; }
             .timeline-dot { left: 30px; }
             .timeline-content { width: calc(100% - 80px); margin-left: 60px; }
             .timeline-item:nth-child(even) { flex-direction: row; }
-            
-            /* Floating words: Increased spacing from device on mobile */
-            .floating-word { display: block; transform: scale(0.8); }
-            .fw-1 { margin-left: -240px; top: 15%; }
-            .fw-2 { margin-left: -280px; top: 45%; }
-            .fw-3 { margin-left: 190px; top: 30%; }
         }
 
         @media (max-width: 480px) {
             .hero h1 { font-size: 3.2rem; }
+
+            /* Hero Visual Dynamically sized for mobile width */
+            .hero-visual {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                padding: 0 5vw;
+            }
+
+            .visual-group {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            /* Responsive phone scaling */
+            .phone {
+                width: 48vw;
+                height: 98vw;
+                border-radius: 8vw;
+                border-width: 1.5vw;
+                box-shadow: 0 5vw 10vw var(--shadow-heavy);
+            }
+
+            .phone-header { padding: 4vw 3vw 2vw; }
+            .progress-bar { height: 1.8vw; margin: 0 2vw; }
+            .phone-content { padding: 3vw; }
+            .phone-content h3 { font-size: 4.5vw; margin-bottom: 2vw; }
+            .verse-line { gap: 1.2vw; margin-bottom: 1.5vw; font-size: 2.5vw; }
+            .blank { width: 9vw; height: 5vw; border-radius: 1.2vw; }
+            .phone-bottom { padding: 4vw 3vw; border-radius: 6vw 6vw 0 0; gap: 2.5vw; }
+            .word-pill { padding: 1.5vw 2.5vw; border-radius: 2vw; font-size: 2.6vw; box-shadow: 0 0.5vw 0 var(--pill-shadow); }
+            .phone-btn { padding: 3vw; border-radius: 2.5vw; font-size: 3vw; }
+
+            /* Scaling words proportionally and moving them to the sides */
+            .floating-word {
+                padding: 1.8vw 3.5vw;
+                border-radius: 2vw;
+                font-size: 2.8vw;
+                box-shadow: 0 0.5vw 0 var(--pill-shadow);
+            }
+
+            .fw-1 { top: 20%; right: 100%; margin-right: 2vw; }
+            .fw-2 { top: 45%; right: 100%; margin-right: 4vw; }
+            .fw-3 { top: 32%; left: 100%; margin-left: 2vw; }
         }
     </style>
 </head>
-<body ontouchstart=""> <nav>
+<body ontouchstart=""> 
+    <nav>
         <div class="logo">Renew</div>
         <button class="hamburger" id="hamburger">
             <span></span>
@@ -384,26 +422,28 @@
         </div>
         
         <div class="hero-visual hidden-on-load">
-            <div class="floating-word fw-1">the</div>
-            <div class="floating-word fw-2">Word</div>
-            <div class="floating-word fw-3">became</div>
+            <div class="visual-group">
+                <div class="floating-word fw-1">the</div>
+                <div class="floating-word fw-2">Word</div>
+                <div class="floating-word fw-3">became</div>
 
-            <div class="phone">
-                <div class="phone-header">
-                    <span style="font-weight:600; opacity:0.9; color: black; font-size: 2em">x</span>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                    <span>☀️</span>
-                </div>
-                <div class="phone-content">
-                    <h3>John 1:14</h3>
-                    <div class="verse-line">And <div class="blank"></div> <div class="blank"></div></div>
-                    <div class="verse-line"><div class="blank"></div> flesh.</div>
-                </div>
-                <div class="phone-bottom">
-                    <div class="word-bank">
-                        <div class="word-pill">the</div> <div class="word-pill">holy</div> <div class="word-pill">a</div>
+                <div class="phone">
+                    <div class="phone-header">
+                        <span style="font-weight:600; opacity:0.9; color: black; font-size: 2em">x</span>
+                        <div class="progress-bar"><div class="progress-fill"></div></div>
+                        <span>☀️</span>
                     </div>
-                    <div class="phone-btn">Continue</div>
+                    <div class="phone-content">
+                        <h3>John 1:14</h3>
+                        <div class="verse-line">And <div class="blank"></div> <div class="blank"></div></div>
+                        <div class="verse-line"><div class="blank"></div> flesh.</div>
+                    </div>
+                    <div class="phone-bottom">
+                        <div class="word-bank">
+                            <div class="word-pill">the</div> <div class="word-pill">holy</div> <div class="word-pill">a</div>
+                        </div>
+                        <div class="phone-btn">Continue</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -507,19 +547,16 @@
     </div>
 
     <script>
-        // --- Hamburger Menu Toggle ---
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link (mobile)
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
 
-        // --- Theme Management ---
         function updateTheme() {
             const hour = new Date().getHours();
             if (hour >= 18 || hour < 6) document.body.classList.add('dark-mode');
@@ -528,7 +565,6 @@
         updateTheme();
         setInterval(updateTheme, 60000);
 
-        // --- Form Logic ---
         const typeSelect = document.getElementById('type');
         const subtypeSelect = document.getElementById('subtype');
         const options = {
@@ -543,7 +579,6 @@
         typeSelect.addEventListener('change', fillSubtypes);
         fillSubtypes();
 
-        // --- Scroll Animations ---
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) {
