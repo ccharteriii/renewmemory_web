@@ -174,7 +174,12 @@
 
         .hero-content { flex: 1; max-width: 520px; }
         .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.4; font-weight: 500; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 30px; line-height: 1.4; font-weight: 500; }
+
+        /* Reasonable size for hero form elements */
+        .hero-form-container {
+            max-width: 380px;
+        }
 
         /* --- Shimmer Effect --- */
         .shimmer-text {
@@ -324,7 +329,7 @@
 
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; padding-top: 20px; }
-            .hero-content { max-width: 100%; order: 1; }
+            .hero-content { max-width: 100%; order: 1; display: flex; flex-direction: column; align-items: center; }
             .hero-visual { order: 2; margin-top: 40px; }
             .hamburger { display: flex; }
             
@@ -355,9 +360,6 @@
                 to { opacity: 1; transform: translateY(0); }
             }
 
-            .nav-links .btn-3d-container { order: -1; width: 100%; }
-            
-            /* Fixed Visibility Issue: Reset opacity to 1 at the end of the animation */
             .nav-links a { 
                 color: var(--text-color); 
                 opacity: 0; 
@@ -367,8 +369,8 @@
                 animation: staggerLinks 0.4s ease forwards;
             }
 
-            .nav-links.active a:nth-child(2) { animation-delay: 0.1s; }
-            .nav-links.active a:nth-child(3) { animation-delay: 0.2s; }
+            .nav-links.active a:nth-child(1) { animation-delay: 0.1s; }
+            .nav-links.active a:nth-child(2) { animation-delay: 0.2s; }
 
             @keyframes staggerLinks {
                 from { opacity: 0; transform: translateY(10px); }
@@ -445,7 +447,6 @@
         <div class="nav-links" id="nav-links">
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <button class="btn-3d-container"><span class="btn-3d-top" style="padding: 10px 22px; font-size: 0.9rem;">Notify Me</span></button>
         </div>
     </nav>
 
@@ -453,7 +454,12 @@
         <div class="hero-content hidden-on-load">
             <h1>Repeat. Recall. <span class="shimmer-text">Renew.</span></h1>
             <p>So God's Word is with you when you need it most.</p>
-            <button class="btn-3d-container"><span class="btn-3d-top">Join the waitlist</span></button>
+            <div class="hero-form-container">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="email@address.com">
+                </div>
+                <button class="btn-3d-container" style="width:100%; border:none; padding:0;"><span class="btn-3d-top" style="width:100%;">Join Waitlist</span></button>
+            </div>
         </div>
         
         <div class="hero-visual hidden-on-load">
