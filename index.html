@@ -10,7 +10,7 @@
             --bg-color: #ffffff;
             --text-color: #111111;
             --text-muted: #555555;
-            --primary-blue: #007AFF; /* Apple-style vibrant blue */
+            --primary-blue: #007AFF; 
             --primary-blue-dark: #0056B3;
             --surface-color: #f2f2f7;
             --card-bg: #ffffff;
@@ -20,6 +20,7 @@
             --shadow-heavy: rgba(0, 0, 0, 0.12);
             --pill-bg: #ffffff;
             --pill-shadow: #c7c7cc;
+            --shimmer-color: rgba(255, 255, 255, 0.8);
         }
 
         /* Dark Mode Variables */
@@ -37,6 +38,7 @@
             --shadow-heavy: rgba(0, 0, 0, 0.6);
             --pill-bg: #2c2c2e;
             --pill-shadow: #000000;
+            --shimmer-color: rgba(255, 255, 255, 0.4);
         }
 
         * {
@@ -44,6 +46,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile tap */
         }
 
         html { scroll-behavior: smooth; }
@@ -130,6 +133,7 @@
             cursor: pointer;
             border: none;
             text-decoration: none;
+            outline: none;
         }
 
         .btn-3d-top {
@@ -142,8 +146,10 @@
             font-size: 1rem;
             transform: translateY(-6px);
             transition: transform 0.1s ease;
+            pointer-events: none; /* Allows the container to catch the active state */
         }
 
+        /* Active state for both Desktop and Mobile */
         .btn-3d-container:active .btn-3d-top {
             transform: translateY(0px);
         }
@@ -160,16 +166,40 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 80px 5%;
+            padding: 40px 5% 80px; /* Reduced top padding from 80px to 40px */
             max-width: 1300px;
             margin: 0 auto;
-            min-height: 80vh;
+            min-height: 75vh;
             gap: 20px;
         }
 
         .hero-content { flex: 1; max-width: 520px; }
         .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 24px; }
         .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.4; font-weight: 500; }
+
+        /* --- Shimmer Effect for "Renew" --- */
+        .shimmer-text {
+            position: relative;
+            display: inline-block;
+            color: var(--primary-blue);
+            background: linear-gradient(
+                120deg, 
+                var(--primary-blue) 0%, 
+                var(--primary-blue) 40%, 
+                var(--shimmer-color) 50%, 
+                var(--primary-blue) 60%, 
+                var(--primary-blue) 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer-swipe 2s infinite linear;
+        }
+
+        @keyframes shimmer-swipe {
+            0% { background-position: 150% 0; }
+            100% { background-position: -50% 0; }
+        }
 
         /* --- Hero Visual & Tight Floating Words --- */
         .hero-visual {
@@ -233,11 +263,11 @@
         .wave-container { line-height: 0; margin-top: 40px; }
         .wave-container svg { width: 100%; height: 100px; fill: var(--primary-blue); }
 
-        /* --- Main Content Section (Width Adjusted to match draft) --- */
+        /* --- Main Content Section --- */
         .blue-section { background-color: var(--primary-blue); color: #ffffff; padding: 100px 5%; }
-        .content-container { max-width: 1200px; margin: 0 auto; } /* Matched to draft max-width */
+        .content-container { max-width: 1200px; margin: 0 auto; }
 
-        .feature-block { display: flex; align-items: center; gap: 60px; margin-bottom: 120px; } /* Matched to draft gap */
+        .feature-block { display: flex; align-items: center; gap: 60px; margin-bottom: 120px; } 
         .feature-block:nth-child(even) { flex-direction: row-reverse; }
         .feature-text { flex: 1; }
         .feature-text h2 { font-size: 2.8rem; margin-bottom: 24px; letter-spacing: -0.02em; }
@@ -246,7 +276,7 @@
         .feature-visual { 
             flex: 1; 
             background: rgba(255,255,255,0.1); 
-            height: 350px; /* Matched to draft height */
+            height: 350px; 
             border-radius: 40px; 
             backdrop-filter: blur(10px); 
             display: flex; 
@@ -287,8 +317,9 @@
         .newsletter-box { background: rgba(255,255,255,0.1); padding: 48px; border-radius: 40px; display: flex; flex-direction: column; justify-content: center; }
 
         @media (max-width: 1024px) {
-            .hero { flex-direction: column; text-align: center; }
-            .hero-content { max-width: 100%; }
+            .hero { flex-direction: column; text-align: center; padding-top: 20px; } /* Even closer on mobile */
+            .hero-content { max-width: 100%; order: 1; }
+            .hero-visual { order: 2; margin-top: 40px; }
             
             /* Hamburger Logic */
             .hamburger { display: flex; }
@@ -301,12 +332,16 @@
                 padding: 30px; 
                 border-radius: 25px; 
                 box-shadow: 0 20px 40px var(--shadow-heavy);
-                display: none; /* Controlled by JS */
+                display: none; 
                 width: 250px;
                 text-align: center;
                 border: 1px solid var(--border-color);
             }
             .nav-links.active { display: flex; }
+
+            /* Reordering Notify Me to the top in the hamburger */
+            .nav-links .btn-3d-container { order: -1; margin-bottom: 20px; width: 100%; }
+            .nav-links a { margin-bottom: 15px; }
             
             .feature-block, .feature-block:nth-child(even) { flex-direction: column; }
             #contact { grid-template-columns: 1fr; }
@@ -315,17 +350,19 @@
             .timeline-content { width: calc(100% - 80px); margin-left: 60px; }
             .timeline-item:nth-child(even) { flex-direction: row; }
             
-            /* Enable floating words on mobile as requested */
+            /* Floating words: Increased spacing from device on mobile */
             .floating-word { display: block; transform: scale(0.8); }
-            .fw-1 { margin-left: -150px; }
-            .fw-2 { margin-left: -180px; }
-            .fw-3 { margin-left: 100px; }
+            .fw-1 { margin-left: -240px; top: 15%; }
+            .fw-2 { margin-left: -280px; top: 45%; }
+            .fw-3 { margin-left: 190px; top: 30%; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 3.2rem; }
         }
     </style>
 </head>
-<body>
-
-    <nav>
+<body ontouchstart=""> <nav>
         <div class="logo">Renew</div>
         <button class="hamburger" id="hamburger">
             <span></span>
@@ -335,13 +372,13 @@
         <div class="nav-links" id="nav-links">
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <button class="btn-3d-container" style="padding: 0;"><span class="btn-3d-top" style="padding: 10px 22px; font-size: 0.9rem;">Notify Me</span></button>
+            <button class="btn-3d-container"><span class="btn-3d-top" style="padding: 10px 22px; font-size: 0.9rem;">Notify Me</span></button>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content hidden-on-load">
-            <h1>Repeat. Recall. Renew.</h1>
+            <h1>Repeat. Recall. <span class="shimmer-text">Renew.</span></h1>
             <p>So God's Word is with you when you need it most.</p>
             <button class="btn-3d-container"><span class="btn-3d-top">Join the waitlist</span></button>
         </div>
@@ -353,7 +390,7 @@
 
             <div class="phone">
                 <div class="phone-header">
-                    <span style="font-weight:600; opacity:0.9; color: black; font-size: 2em"></span>
+                    <span style="font-weight:600; opacity:0.9; color: black; font-size: 2em">x</span>
                     <div class="progress-bar"><div class="progress-fill"></div></div>
                     <span>☀️</span>
                 </div>
