@@ -74,13 +74,14 @@
             padding: 20px 5%;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 100;
         }
 
         .logo {
             font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -0.03em;
-            /* color: var(--primary-blue); */
         }
 
         .nav-links {
@@ -100,7 +101,27 @@
 
         .nav-links a:hover { opacity: 1; color: var(--primary-blue); }
 
-        /* --- Mechanical 3D Button (Only top layer moves) --- */
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* --- Mechanical 3D Button --- */
         .btn-3d-container {
             display: inline-block;
             background-color: var(--primary-blue-dark);
@@ -127,7 +148,6 @@
             transform: translateY(0px);
         }
 
-        /* Secondary Variant */
         .btn-3d-container.secondary { background-color: var(--border-color); }
         .btn-3d-container.secondary .btn-3d-top {
             background-color: var(--surface-color);
@@ -174,7 +194,6 @@
             position: relative;
         }
 
-        /* Floating words pinned to the device */
         .floating-word {
             position: absolute;
             background-color: var(--pill-bg);
@@ -188,7 +207,6 @@
             animation: float-tight 4s ease-in-out infinite;
         }
 
-        /* Positions pulled close to device center */
         .fw-1 { top: 20%; left: 50%; margin-left: -210px; animation-delay: 0s; }
         .fw-2 { top: 45%; left: 50%; margin-left: -250px; animation-delay: 1.5s; }
         .fw-3 { top: 32%; left: 50%; margin-left: 155px; animation-delay: 0.8s; }
@@ -215,78 +233,93 @@
         .wave-container { line-height: 0; margin-top: 40px; }
         .wave-container svg { width: 100%; height: 100px; fill: var(--primary-blue); }
 
-        /* --- Main Content Section --- */
+        /* --- Main Content Section (Width Adjusted to match draft) --- */
         .blue-section { background-color: var(--primary-blue); color: #ffffff; padding: 100px 5%; }
-        .content-container { max-width: 1100px; margin: 0 auto; }
+        .content-container { max-width: 1200px; margin: 0 auto; } /* Matched to draft max-width */
 
-        .feature-block { display: flex; align-items: center; gap: 80px; margin-bottom: 120px; }
+        .feature-block { display: flex; align-items: center; gap: 60px; margin-bottom: 120px; } /* Matched to draft gap */
         .feature-block:nth-child(even) { flex-direction: row-reverse; }
+        .feature-text { flex: 1; }
         .feature-text h2 { font-size: 2.8rem; margin-bottom: 24px; letter-spacing: -0.02em; }
         .feature-text p { font-size: 1.2rem; line-height: 1.5; opacity: 0.9; font-weight: 400; }
-        .feature-visual { flex: 1; background: rgba(255,255,255,0.1); height: 320px; border-radius: 40px; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); }
+        
+        .feature-visual { 
+            flex: 1; 
+            background: rgba(255,255,255,0.1); 
+            height: 350px; /* Matched to draft height */
+            border-radius: 40px; 
+            backdrop-filter: blur(10px); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 1px solid rgba(255,255,255,0.2); 
+        }
 
-        /* --- Immersive Timeline (Clean Version) --- */
+        .feature-visual-placeholder {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 24px;
+            transform: rotate(-10deg);
+        }
+
+        /* --- Timeline --- */
         #about { margin-top: 60px; text-align: center; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 80px; }
         .timeline { max-width: 800px; margin: 60px auto; position: relative; padding: 20px 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.2); transform: translateX(-50%); }
-        
         .timeline-item { width: 100%; margin-bottom: 80px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         .timeline-item:nth-child(even) { flex-direction: row-reverse; }
-
         .timeline-dot { width: 16px; height: 16px; background: #ffffff; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3; box-shadow: 0 0 0 6px rgba(255,255,255,0.1); }
         .timeline-content { width: 42%; background: var(--card-bg); color: var(--text-color); padding: 32px; border-radius: 30px; text-align: left; box-shadow: 0 15px 35px var(--shadow-heavy); transition: transform 0.3s ease; }
-        .timeline-content:hover { transform: translateY(-5px); }
         .timeline-date { font-weight: 800; font-size: 0.8rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
         .timeline-content h4 { font-size: 1.4rem; margin-bottom: 10px; font-weight: 800; }
 
-        /* --- Modern Form Styling --- */
+        /* --- Forms --- */
         #contact { margin-top: 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding-top: 80px; border-top: 1px solid rgba(255,255,255,0.15); }
         .contact-card { background: var(--card-bg); color: var(--text-color); padding: 48px; border-radius: 40px; box-shadow: 0 30px 60px var(--shadow-heavy); }
         .contact-card h3 { font-size: 2.2rem; margin-bottom: 30px; letter-spacing: -0.03em; }
-
         .form-group { margin-bottom: 24px; }
         .form-group label { display: block; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; }
-
-        .form-control {
-            width: 100%;
-            padding: 18px 22px;
-            border-radius: 20px;
-            border: 2px solid var(--border-color);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-size: 1rem;
-            font-weight: 600;
-            outline: none;
-            transition: all 0.2s;
-            appearance: none;
-        }
-
+        .form-control { width: 100%; padding: 18px 22px; border-radius: 20px; border: 2px solid var(--border-color); background-color: var(--bg-color); color: var(--text-color); font-size: 1rem; font-weight: 600; outline: none; transition: all 0.2s; appearance: none; }
         .form-control:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1); }
-
-        /* Modern Bubbly Dropdown Chevron */
-        select.form-control {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-            background-size: 18px;
-            padding-right: 50px;
-            cursor: pointer;
-        }
-
+        select.form-control { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; background-size: 18px; padding-right: 50px; cursor: pointer; }
         textarea.form-control { min-height: 140px; line-height: 1.5; }
-
         .newsletter-box { background: rgba(255,255,255,0.1); padding: 48px; border-radius: 40px; display: flex; flex-direction: column; justify-content: center; }
 
         @media (max-width: 1024px) {
             .hero { flex-direction: column; text-align: center; }
             .hero-content { max-width: 100%; }
+            
+            /* Hamburger Logic */
+            .hamburger { display: flex; }
+            .nav-links { 
+                position: absolute; 
+                top: 80px; 
+                right: 5%; 
+                background: var(--card-bg); 
+                flex-direction: column; 
+                padding: 30px; 
+                border-radius: 25px; 
+                box-shadow: 0 20px 40px var(--shadow-heavy);
+                display: none; /* Controlled by JS */
+                width: 250px;
+                text-align: center;
+                border: 1px solid var(--border-color);
+            }
+            .nav-links.active { display: flex; }
+            
             .feature-block, .feature-block:nth-child(even) { flex-direction: column; }
             #contact { grid-template-columns: 1fr; }
             .timeline::before { left: 30px; }
             .timeline-dot { left: 30px; }
             .timeline-content { width: calc(100% - 80px); margin-left: 60px; }
             .timeline-item:nth-child(even) { flex-direction: row; }
-            .floating-word { display: none; }
+            
+            /* Enable floating words on mobile as requested */
+            .floating-word { display: block; transform: scale(0.8); }
+            .fw-1 { margin-left: -150px; }
+            .fw-2 { margin-left: -180px; }
+            .fw-3 { margin-left: 100px; }
         }
     </style>
 </head>
@@ -294,7 +327,12 @@
 
     <nav>
         <div class="logo">Renew</div>
-        <div class="nav-links">
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <button class="btn-3d-container" style="padding: 0;"><span class="btn-3d-top" style="padding: 10px 22px; font-size: 0.9rem;">Notify Me</span></button>
@@ -343,18 +381,22 @@
             <section id="features">
                 <div class="feature-block hidden-on-load">
                     <div class="feature-text">
-                        <h2>Master Scripture</h2>
-                        <p>Renew uses interactive active recall to move verses from your screen to your heart. It's built on cognitive science to make memorization feel like a game, not a chore.</p>
+                        <h2>Why you should download</h2>
+                        <p>Renew utilizes proven active recall techniques tailored for scripture memorization. Instead of passively reading, you interactively fill in the blanks, solidifying the verses in your long-term memory. Our bubbly, distraction-free interface makes learning a daily habit you actually look forward to.</p>
                     </div>
-                    <div class="feature-visual"></div>
+                    <div class="feature-visual">
+                        <div class="feature-visual-placeholder"></div>
+                    </div>
                 </div>
 
                 <div class="feature-block hidden-on-load">
                     <div class="feature-text">
-                        <h2>Designed for Focus</h2>
-                        <p>No distractions. No clutter. Just a bubbly, native experience that feels right at home on your device. Every animation is crafted to keep you engaged.</p>
+                        <h2>Why you should trust us</h2>
+                        <p>Built by a passionate team of developers and designers, Renew is engineered for performance and privacy. We believe that spiritual tools should feature top-tier, app-native design. Your progress is stored securely, and our methods are rooted in cognitive science.</p>
                     </div>
-                    <div class="feature-visual"></div>
+                    <div class="feature-visual">
+                         <div class="feature-visual-placeholder" style="border-radius: 50%;"></div>
+                    </div>
                 </div>
             </section>
 
@@ -428,6 +470,18 @@
     </div>
 
     <script>
+        // --- Hamburger Menu Toggle ---
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
         // --- Theme Management ---
         function updateTheme() {
             const hour = new Date().getHours();
@@ -437,7 +491,7 @@
         updateTheme();
         setInterval(updateTheme, 60000);
 
-        // --- Modern Form Logic ---
+        // --- Form Logic ---
         const typeSelect = document.getElementById('type');
         const subtypeSelect = document.getElementById('subtype');
         const options = {
