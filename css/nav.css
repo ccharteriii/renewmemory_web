@@ -1,0 +1,219 @@
+/*
+ * nav.css
+ * Sticky navbar: hides on scroll-down, reappears on scroll-up.
+ * Hamburger menu with staggered link animations.
+ */
+
+/* --- Sticky wrapper ------------------------------------------------- */
+.nav-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid transparent;
+    transition:
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.4s ease,
+        border-color 0.4s ease;
+}
+
+body.dark-mode .nav-wrapper {
+    background-color: rgba(0, 0, 0, 0.88);
+}
+
+/* scrolled state — slight border for depth */
+.nav-wrapper.scrolled {
+    border-bottom-color: var(--border-color);
+}
+
+/* hidden state — slide up */
+.nav-wrapper.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* --- Nav inner layout ----------------------------------------------- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--nav-height);
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- Logo ----------------------------------------------------------- */
+.logo {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--text-color);
+    transition: color 0.2s;
+}
+
+.logo span {
+    color: var(--primary-blue);
+}
+
+/* --- Desktop links -------------------------------------------------- */
+.nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color);
+    opacity: 0.75;
+    transition: opacity 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--primary-blue);
+}
+
+/* --- CTA 3D button in nav ------------------------------------------- */
+/* Wraps a .btn-3d-top inside an anchor — same mechanics as hero button */
+.nav-btn-cta {
+    /* override default btn-3d-container background for nav context */
+    background-color: var(--primary-blue-dark) !important;
+    border-radius: 15px !important;
+    opacity: 1 !important;
+    padding: 5px 0 0 0 !important; /* match btn-3d-container padding-top fix */
+}
+
+.nav-btn-cta .btn-3d-top {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+    border-radius: 12px;
+}
+
+/* --- Hamburger button ----------------------------------------------- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 6px;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+    z-index: 201;
+}
+
+.hamburger:hover {
+    background-color: var(--surface-color);
+}
+
+.hamburger span {
+    display: block;
+    height: 2.5px;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                width 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger span:nth-child(1) { width: 22px; }
+.hamburger span:nth-child(2) { width: 16px; }
+.hamburger span:nth-child(3) { width: 22px; }
+
+/* X state */
+.hamburger.open span:nth-child(1) {
+    width: 22px;
+    transform: translateY(7.5px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.hamburger.open span:nth-child(3) {
+    width: 22px;
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* --- Mobile nav drawer ---------------------------------------------- */
+@media (max-width: 1024px) {
+    .hamburger { display: flex; }
+
+    .nav-links {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--sp-3);
+        gap: var(--sp-1);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-lg);
+        /* hidden by default */
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.28s ease, transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-links.active {
+        pointer-events: auto;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: opacity 0.25s ease, transform 0.25s ease,
+                    background-color 0.15s, color 0.15s;
+    }
+
+    /* stagger reveal */
+    .nav-links.active a:nth-child(1)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.04s; }
+    .nav-links.active a:nth-child(2)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.08s; }
+    .nav-links.active a:nth-child(3)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.12s; }
+    .nav-links.active a:nth-child(4)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.16s; }
+    .nav-links.active a:nth-child(5)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.20s; }
+    .nav-links.active a:nth-child(6)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.24s; }
+    .nav-links.active a:nth-child(7)  { opacity: 0.85; transform: translateX(0); transition-delay: 0.28s; }
+    /* 8th child = the 3D CTA button */
+    .nav-links.active a:nth-child(8)  { opacity: 1;    transform: translateX(0); transition-delay: 0.32s; }
+
+    .nav-links a:hover {
+        opacity: 1;
+        background-color: var(--surface-color);
+        color: var(--primary-blue);
+    }
+
+    /* CTA button inside mobile drawer — must be block-level to stretch */
+    .nav-links .nav-btn-cta {
+        display: block;       /* inline-block won't stretch; block will */
+        margin-top: var(--sp-1);
+        text-align: center;
+    }
+
+    .nav-links .nav-btn-cta .btn-3d-top {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 18px;
+        box-sizing: border-box;
+    }
+}

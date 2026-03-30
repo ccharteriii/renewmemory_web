@@ -1,0 +1,113 @@
+/*
+ * hero.css
+ * Hero section: split layout, dot-grid bg, headline, CTA form.
+ */
+
+/* --- Dot-grid background removed per design direction --- */
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 56px 5% 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: calc(100vh - var(--nav-height));
+    gap: 40px;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+/* --- Content side -------------------------------------------------- */
+.hero-content {
+    flex: 1;
+    max-width: 520px;
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 900;
+    line-height: 1.03;
+    letter-spacing: -0.045em;
+    margin-bottom: var(--sp-3);
+    color: var(--text-color);
+}
+
+.hero-sub {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: var(--sp-2);
+    line-height: 1.4;
+}
+
+.hero-micro {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: var(--sp-4);
+    line-height: 1.5;
+}
+
+/* --- Shimmer on "Renew." ------------------------------------------- */
+.shimmer-text {
+    color: var(--primary-blue);
+    background: linear-gradient(
+        120deg,
+        var(--primary-blue) 0%,
+        var(--primary-blue) 35%,
+        var(--shimmer-color) 50%,
+        var(--primary-blue) 65%,
+        var(--primary-blue) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-swipe 5.5s infinite linear;
+    display: inline-block;
+}
+
+@keyframes shimmer-swipe {
+    0%   { background-position: 150% 0; }
+    27%  { background-position: -50% 0; }
+    100% { background-position: -50% 0; }
+}
+
+/* --- Hero form ------------------------------------------------------ */
+.hero-form-container {
+    max-width: 400px;
+}
+
+.hero-form-row {
+    display: flex;
+    gap: var(--sp-2);
+    align-items: center; /* vertically center input face with button face */
+    flex-wrap: wrap;
+}
+
+.hero-form-row .form-control {
+    flex: 1;
+    min-width: 180px;
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: var(--sp-1);
+    font-weight: 500;
+}
+
+/* --- Visual side --------------------------------------------------- */
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* overflow must stay VISIBLE so phone shadow is never clipped */
+    overflow: visible;
+    padding: 40px 20px;
+}

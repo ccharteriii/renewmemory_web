@@ -1,0 +1,154 @@
+/*
+ * phone.css
+ * Phone mockup + floating word chips.
+ * STRUCTURE PRESERVED — only the mobile shadow-clipping bug is fixed.
+ *
+ * Fix: removed overflow:hidden from .hero-visual and .visual-group at all
+ * breakpoints. Shadow now renders naturally because the containing block
+ * has overflow:visible and sufficient padding for the drop shadow.
+ */
+
+/* --- Visual group wrapper ------------------------------------------ */
+.visual-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Must be overflow:visible so floating chips and phone shadow show */
+    overflow: visible;
+}
+
+/* --- Phone shell --------------------------------------------------- */
+.phone {
+    width: 300px;
+    height: 610px;
+    border-radius: 50px;
+    border: 10px solid var(--phone-border);
+    background-color: var(--bg-color);
+    /* shadow — needs overflow:visible on ancestors to render */
+    box-shadow:
+        0 30px 60px var(--shadow-heavy),
+        0 8px 20px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;   /* only the phone itself clips its internal content */
+    z-index: 5;
+    position: relative;
+}
+
+/* --- Phone inner sections ------------------------------------------ */
+.phone-header {
+    padding: 30px 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-bar {
+    height: 12px;
+    background: var(--border-color);
+    border-radius: 10px;
+    flex-grow: 1;
+    margin: 0 15px;
+    position: relative;
+}
+
+.progress-fill {
+    position: absolute;
+    height: 100%;
+    width: 65%;
+    background: var(--primary-blue);
+    border-radius: 10px;
+}
+
+.phone-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.phone-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--text-color);
+}
+
+.verse-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-color);
+}
+
+.blank {
+    width: 55px;
+    height: 32px;
+    background-color: var(--surface-color);
+    border-radius: 10px;
+}
+
+.phone-bottom {
+    background-color: var(--primary-blue);
+    padding: 30px 20px;
+    border-radius: 40px 40px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.word-pill {
+    background-color: var(--pill-bg);
+    padding: 10px 18px;
+    border-radius: 15px;
+    font-weight: 700;
+    box-shadow: 0 4px 0 var(--pill-shadow);
+    color: var(--text-color);
+    font-family: var(--font-body);
+}
+
+.phone-btn {
+    background-color: var(--primary-blue-dark);
+    color: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 800;
+    font-family: var(--font-display);
+}
+
+/* --- Floating word chips ------------------------------------------- */
+.floating-word {
+    position: absolute;
+    background-color: var(--pill-bg);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-weight: 800;
+    font-family: var(--font-display);
+    box-shadow: 0 4px 0 var(--pill-shadow), var(--shadow-md);
+    z-index: 6;
+    white-space: nowrap;
+    animation: float-tight 4s ease-in-out infinite;
+    /* chips live outside .phone bounds — overflow:visible on .visual-group needed */
+}
+
+.fw-1 { top: 20%; right: 100%; margin-right: 20px; animation-delay: 0s; }
+.fw-2 { top: 45%; right: 100%; margin-right: 40px; animation-delay: 1.5s; }
+.fw-3 { top: 32%; left: 100%; margin-left: 20px; animation-delay: 0.8s; }
+
+@keyframes float-tight {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}

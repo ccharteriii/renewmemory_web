@@ -1,0 +1,457 @@
+/*
+ * sections.css
+ * All page sections below the hero.
+ * Each section has an ID comment for quick navigation.
+ */
+
+/* === Wave + Blue Wrapper ========================================== */
+.wave-container {
+    line-height: 0;
+    margin-top: 40px;
+    margin-bottom: -1px;
+}
+
+.wave-container svg {
+    width: 100%;
+    height: 100px;
+    fill: var(--primary-blue);
+    stroke: none;
+}
+
+.blue-section {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    padding: var(--sp-12) 5% var(--sp-10);
+    position: relative;
+}
+
+.content-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- Shared section spacing ---------------------------------------- */
+.page-section {
+    padding: var(--sp-10) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.page-section:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+/* --- White card that sits on the blue background ------------------- */
+.white-card {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: var(--radius-xl);
+    padding: var(--sp-8) var(--sp-8);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- Section headline / subtext within blue section ---------------- */
+.section-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: var(--sp-2);
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--sp-3);
+    line-height: 1.1;
+}
+
+.section-body {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 640px;
+}
+
+/* --- Scripture quote pill ------------------------------------------ */
+.scripture-quote {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: var(--sp-4);
+    max-width: 560px;
+    line-height: 1.6;
+}
+
+/* --- Scroll offset for sticky nav ---------------------------------- */
+/* Prevents section headings from hiding behind the nav bar on anchor links */
+#problem,
+#how-it-works,
+#what-makes-it-different,
+#spiritual-depth,
+#why-it-works,
+#use-cases,
+#about,
+#waitlist-cta,
+#contact {
+    scroll-margin-top: calc(var(--nav-height) + 20px);
+}
+
+/* === (1) PROBLEM SECTION ========================================== */
+#problem .section-body {
+    white-space: pre-line;
+}
+
+.problem-pull {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin: var(--sp-4) 0 var(--sp-3);
+    line-height: 1.35;
+}
+
+/* === ALTERNATING FEATURE BLOCKS (Problem, Solution, Different, Depth) === */
+.feature-block {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-8);
+    margin-bottom: var(--sp-10);
+}
+
+.feature-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.feature-text {
+    flex: 1;
+}
+
+.feature-visual {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.10);
+    height: 320px;
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    flex-shrink: 0;
+}
+
+.feature-visual-placeholder {
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-lg);
+    transform: rotate(-8deg);
+}
+
+/* Wrapper that holds ALL feature blocks — no extra section borders between them */
+.feature-blocks-section {
+    padding: 0 0 var(--sp-4);
+    border-top: none; /* blue-section top padding already provides breathing room */
+}
+
+.feature-blocks-section:first-child {
+    border-top: none;
+}
+
+/* === (3) WHY IT WORKS — 3 cards =================================== */
+#why-it-works {
+    text-align: center;
+}
+
+#why-it-works .section-title,
+#why-it-works .section-label {
+    text-align: center;
+}
+
+.feature-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-5) var(--sp-4);
+    text-align: left;
+    transition: background 0.25s, transform 0.25s;
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-4px);
+}
+
+.feature-card-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--sp-3);
+}
+
+.feature-card-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.feature-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: var(--sp-2);
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.6;
+}
+
+/* === (4) WHAT MAKES IT DIFFERENT ================================== */
+#what-makes-it-different {}
+
+/* === (5) SPIRITUAL DEPTH — inside a feature-block, left-aligned ===== */
+/* No centering overrides here. Layout is handled by .feature-block. */
+
+.depth-scripture {
+    font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.5;
+    max-width: 100%; /* fills feature-text column, no centering */
+    margin: 0;       /* margins set by context (inline style for feature-block) */
+    padding: var(--sp-5);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-xl);
+}
+
+.depth-scripture cite {
+    display: block;
+    margin-top: var(--sp-2);
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.04em;
+}
+
+/* === (6) USE CASES — Timeline ===================================== */
+#use-cases {}
+
+.timeline {
+    max-width: 800px;
+    margin: var(--sp-8) auto 0;
+    position: relative;
+    padding: var(--sp-3) 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    width: 100%;
+    margin-bottom: var(--sp-8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    background: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.12);
+    flex-shrink: 0;
+}
+
+.timeline-content {
+    width: 42%;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: var(--sp-4);
+    border-radius: var(--radius-lg);
+    text-align: left;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-3px);
+}
+
+.timeline-date {
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.timeline-content h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.timeline-content p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* === (7) MISSION / ABOUT ========================================== */
+#about {}
+
+.mission-content {
+    max-width: 680px;
+}
+
+.mission-body {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.mission-stanza {
+    margin-top: var(--sp-4);
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 2;
+}
+
+/* === (8) FINAL CTA ================================================ */
+.section-final-cta {
+    text-align: center;
+    padding: var(--sp-10) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.section-final-cta .section-title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.final-cta-form {
+    display: flex;
+    gap: var(--sp-2);
+    justify-content: center;
+    align-items: center; /* vertically align input face with button face */
+    flex-wrap: wrap;
+    margin-top: var(--sp-5);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.final-cta-form .form-control {
+    flex: 1;
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.final-cta-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.final-cta-form .form-control:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.10);
+}
+
+/* === CONTACT SECTION — single column ============================== */
+#contact {
+    margin-top: 0;
+    padding-top: var(--sp-10);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-card {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: var(--sp-6);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-card h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: var(--sp-4);
+    letter-spacing: -0.03em;
+}
+
+.form-submit-hint {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-top: var(--sp-2);
+    font-weight: 500;
+}
+
+/* Footer */
+.site-footer {
+    background-color: var(--primary-blue);
+    padding: var(--sp-6) 5%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}

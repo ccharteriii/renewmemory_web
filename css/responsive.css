@@ -1,0 +1,228 @@
+/*
+ * responsive.css
+ * Breakpoints: 1024px (tablet/hamburger), 768px (tablet portrait), 480px (mobile).
+ * Shadow-clipping fix: .hero-visual and .visual-group keep overflow:visible at all sizes.
+ */
+
+/* ------------------------------------------------------------------ */
+/* TABLET & HAMBURGER (≤ 1024px)                                       */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+    /* Hero: stack vertically */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: var(--sp-5);
+        min-height: auto;
+        padding-bottom: var(--sp-8);
+    }
+
+    .hero-content {
+        max-width: 100%;
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-form-container {
+        width: 100%;
+        max-width: 460px;
+    }
+
+    .hero-form-row {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        order: 2;
+        width: 100%;
+    }
+
+    /* Feature cards: 2 columns on tablet */
+    .feature-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Feature blocks: stack on tablet */
+    .feature-block, .feature-block:nth-child(even) {
+        flex-direction: column;
+        gap: var(--sp-5);
+    }
+
+    .feature-visual {
+        width: 100%;
+        height: 220px;
+    }
+
+    /* Timeline: move line to left side on mobile */
+    .timeline::before { left: 28px; }
+    .timeline-dot { left: 28px; }
+    .timeline-content { width: calc(100% - 72px); margin-left: 56px; }
+    .timeline-item:nth-child(even) { flex-direction: row; }
+
+    /* Contact: already single column */
+}
+
+/* ------------------------------------------------------------------ */
+/* TABLET PORTRAIT (≤ 768px)                                           */
+/* ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: clamp(2.6rem, 8vw, 3.5rem);
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 5vw, 2.4rem);
+    }
+
+    .feature-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blue-section {
+        padding: var(--sp-10) 4% var(--sp-8);
+    }
+
+    .contact-card {
+        padding: var(--sp-5);
+    }
+
+    .contact-card h3 {
+        font-size: 1.6rem;
+    }
+
+    .depth-scripture {
+        padding: var(--sp-4) var(--sp-5);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* MOBILE (≤ 480px)                                                    */
+/* ------------------------------------------------------------------ */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: clamp(2.4rem, 10vw, 3rem);
+    }
+
+    .hero-sub {
+        font-size: 1rem;
+    }
+
+    /* ---- Phone + chips at mobile scale ---- */
+
+    /* IMPORTANT: overflow must stay visible so phone shadow is never clipped */
+    .hero-visual {
+        width: 100%;
+        overflow: visible;
+        padding: 30px 10px;       /* padding provides shadow breathing room */
+    }
+
+    .visual-group {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: visible;        /* keep overflow:visible — shadow fix */
+    }
+
+    .phone {
+        width: 46vw;
+        height: 94vw;
+        border-radius: 8vw;
+        border-width: 1.5vw;
+        flex-shrink: 0;
+        z-index: 5;
+    }
+
+    .phone-header    { padding: 4vw 3vw 2vw; }
+    .progress-bar    { height: 1.8vw; margin: 0 2vw; }
+    .phone-content   { padding: 3vw; }
+    .phone-content h3{ font-size: 4.5vw; margin-bottom: 2vw; }
+    .verse-line      { gap: 1.2vw; margin-bottom: 1.5vw; font-size: 2.5vw; }
+    .blank           { width: 9vw; height: 5vw; border-radius: 1.2vw; }
+    .phone-bottom    { padding: 4vw 3vw; border-radius: 6vw 6vw 0 0; gap: 2.5vw; }
+    .word-pill       { padding: 1.5vw 2.5vw; border-radius: 2vw; font-size: 2.6vw; box-shadow: 0 0.5vw 0 var(--pill-shadow); }
+    .phone-btn       { padding: 3vw; border-radius: 2.5vw; font-size: 3vw; }
+
+    .floating-word {
+        padding: 1.8vw 3.5vw;
+        border-radius: 2vw;
+        font-size: 2.8vw;
+        box-shadow: 0 0.5vw 0 var(--pill-shadow);
+        flex-shrink: 0;
+    }
+
+    /* chips: positioned relative to phone on mobile */
+    .fw-1 { top: 20%; right: 75%; margin-right: 2vw; }
+    .fw-2 { top: 45%; right: 75%; margin-right: 4vw; }
+    .fw-3 { top: 32%; left: 75%; margin-left: 2vw;  }
+
+    /* General section adjustments */
+    .blue-section {
+        padding: var(--sp-8) var(--sp-3) var(--sp-6);
+    }
+
+    .content-container {
+        padding: 0;
+    }
+
+    .section-title {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+    }
+
+    .section-body {
+        font-size: 1rem;
+    }
+
+    .feature-card {
+        padding: var(--sp-4) var(--sp-3);
+    }
+
+    .contact-card {
+        padding: var(--sp-4);
+        border-radius: var(--radius-lg);
+    }
+
+    .final-cta-form {
+        flex-direction: column;
+    }
+
+    .final-cta-form .form-control {
+        min-width: unset;
+    }
+
+    .final-cta-form .btn-3d-container {
+        width: 100%;
+    }
+
+    .final-cta-form .btn-3d-top {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* LANDSCAPE PHONE (≤ 480px height)                                    */
+/* ------------------------------------------------------------------ */
+@media (max-height: 480px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .hero-content {
+        align-items: flex-start;
+    }
+
+    .hero-visual {
+        max-width: 40%;
+    }
+
+    .phone {
+        width: 32vw;
+        height: 65vw;
+    }
+}

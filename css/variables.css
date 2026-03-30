@@ -1,0 +1,105 @@
+/*
+ * variables.css
+ * Design tokens: colors, spacing, radius, typography, shadows.
+ * All theming is driven from here — touch this file to retheme the whole site.
+ */
+
+:root {
+    /* --- Brand Colors --- */
+    --primary-blue:       #007AFF;
+    --primary-blue-dark:  #0056B3;
+    --primary-blue-faint: rgba(0, 122, 255, 0.10);
+    --primary-green:      #34C759;
+    --primary-green-dark: #248A3D;
+
+    /* --- Surface / Background --- */
+    --bg-color:        #ffffff;
+    --bg-secondary:    #f5f5f7;
+    --surface-color:   #f2f2f7;
+    --card-bg:         #ffffff;
+    --border-color:    #d1d1d6;
+    --phone-border:    #1c1c1e;
+
+    /* --- Text --- */
+    --text-color:      #111111;
+    --text-muted:      #555555;
+    --text-light:      #8e8e93;
+
+    /* --- Pill / Chip --- */
+    --pill-bg:         #ffffff;
+    --pill-shadow:     #c7c7cc;
+
+    /* --- Shimmer --- */
+    --shimmer-color:   rgba(255, 255, 255, 0.8);
+
+    /* --- Dot grid (hero bg) --- */
+    --dot-color:       rgba(0, 122, 255, 0.18);
+
+    /* --- Shadows --- */
+    --shadow-sm:       0 2px 8px  rgba(0, 0, 0, 0.06);
+    --shadow-md:       0 8px 24px rgba(0, 0, 0, 0.10);
+    --shadow-lg:       0 24px 56px rgba(0, 0, 0, 0.14);
+
+    /* --- Shorthand for legacy uses --- */
+    --shadow-light:    rgba(0, 0, 0, 0.08);
+    --shadow-heavy:    rgba(0, 0, 0, 0.12);
+
+    /* --- Typography --- */
+    --font-display:    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-body:       -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* --- Spacing (8-pt scale) --- */
+    --sp-1:  8px;
+    --sp-2:  16px;
+    --sp-3:  24px;
+    --sp-4:  32px;
+    --sp-5:  40px;
+    --sp-6:  48px;
+    --sp-8:  64px;
+    --sp-10: 80px;
+    --sp-12: 96px;
+
+    /* --- Border Radius --- */
+    --radius-sm:  12px;
+    --radius-md:  20px;
+    --radius-lg:  32px;
+    --radius-xl:  48px;
+
+    /* --- Nav --- */
+    --nav-height: 72px;
+}
+
+/* =====================================================
+   DARK MODE — applied via body.dark-mode (JS toggled)
+   ===================================================== */
+body.dark-mode {
+    --primary-blue:       #0a84ff;
+    --primary-blue-dark:  #0055c4;
+    --primary-blue-faint: rgba(10, 132, 255, 0.12);
+    --primary-green:      #30d158;
+    --primary-green-dark: #1a7d32;
+
+    --bg-color:        #000000;
+    --bg-secondary:    #0d0d0f;
+    --surface-color:   #1c1c1e;
+    --card-bg:         #1c1c1e;
+    --border-color:    #38383a;
+    --phone-border:    #3a3a3c;
+
+    --text-color:      #ffffff;
+    --text-muted:      #aeaeb2;
+    --text-light:      #636366;
+
+    --pill-bg:         #2c2c2e;
+    --pill-shadow:     #000000;
+
+    --shimmer-color:   rgba(255, 255, 255, 0.4);
+    --dot-color:       rgba(10, 132, 255, 0.25);
+
+    --shadow-sm:       0 2px 8px  rgba(0, 0, 0, 0.35);
+    --shadow-md:       0 8px 24px rgba(0, 0, 0, 0.50);
+    --shadow-lg:       0 24px 56px rgba(0, 0, 0, 0.65);
+
+    --shadow-light:    rgba(0, 0, 0, 0.40);
+    --shadow-heavy:    rgba(0, 0, 0, 0.60);
+}

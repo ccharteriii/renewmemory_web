@@ -1,0 +1,143 @@
+/*
+ * components.css
+ * Reusable UI: 3D press buttons, form controls, select styling.
+ */
+
+/* === 3D Press Button ============================================== */
+.btn-3d-container {
+    display: inline-block;
+    background-color: var(--primary-blue-dark);
+    border-radius: 15px;
+    padding: 5px 0 0 0;  /* top padding = translateY offset, so face stays in-bounds */
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    transition: filter 0.2s;
+    flex-shrink: 0;
+    overflow: visible;
+}
+
+.btn-3d-container:hover {
+    filter: brightness(1.08);
+}
+
+.btn-3d-top {
+    display: block;
+    padding: 14px 26px;
+    border-radius: 15px;
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    transform: translateY(-5px);
+    transition: transform 0.1s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+}
+
+.btn-3d-container:active .btn-3d-top {
+    transform: translateY(0px);
+}
+
+/* Secondary (inverted) */
+.btn-3d-container.secondary {
+    background-color: var(--border-color);
+}
+
+.btn-3d-container.secondary .btn-3d-top {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* White variant (used inside blue sections) */
+.btn-3d-container.btn-white {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-3d-container.btn-white .btn-3d-top {
+    background-color: #ffffff;
+    color: var(--primary-blue);
+}
+
+/* Full-width helper */
+.btn-full {
+    width: 100%;
+}
+
+.btn-full .btn-3d-top {
+    width: 100%;
+    text-align: center;
+}
+
+/* === Forms ======================================================== */
+.form-group {
+    margin-bottom: var(--sp-3);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+}
+
+/* contact card label is on dark bg */
+.contact-card .form-group label {
+    color: var(--text-muted);
+}
+
+.form-control {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.4s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-control::placeholder {
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.form-control:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px var(--primary-blue-faint);
+}
+
+/* Select with chevron arrow */
+select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 16px;
+    padding-right: 48px;
+    cursor: pointer;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* Optional field label hint */
+.label-optional {
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-left: 6px;
+}

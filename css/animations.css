@@ -1,0 +1,56 @@
+/*
+ * animations.css
+ * Scroll-reveal classes + all @keyframes.
+ * JS adds .fade-in-up when element enters viewport.
+ */
+
+/* --- Scroll reveal ------------------------------------------------- */
+.hidden-on-load {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger helpers (add class alongside hidden-on-load) */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* --- Keyframes ----------------------------------------------------- */
+
+/* Shimmer sweep — used on hero headline */
+@keyframes shimmer-swipe {
+    0%   { background-position: 150% 0; }
+    27%  { background-position: -50% 0; }
+    100% { background-position: -50% 0; }
+}
+
+/* Phone chip float */
+@keyframes float-tight {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}
+
+/* Subtle pulse for the progress bar fill */
+@keyframes pulse-bar {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.7; }
+}
+
+.progress-fill {
+    animation: pulse-bar 3s ease-in-out infinite;
+}
+
+/* Menu reveal */
+@keyframes menuReveal {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
